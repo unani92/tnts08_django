@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% comment %} css and bootstrap {% endcomment %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/e4c1cde6dc.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'stylesheet/index.css' %}">
+  
+  <title>Ultras Gruppo THANATOS</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-light fixed-top">
+    <a class="navbar-brand" href="/home/"><img src="{% static 'images/logo.jpg' %}" alt=""></a>
+    <button class="navbar-toggler border-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon bg-li"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown mx-3">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Multimedia
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Photo</a>
+            <a class="dropdown-item" href="#">Cori</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="fac"><i class="fab fa-facebook-square"></i>  Facebook</a>
+            <a class="dropdown-item" href="#"><i class="fab fa-instagram"></i>  Instagram</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown mx-3">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Calender
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#"><i class="fas fa-clipboard-check"></i>  참전 신청</a>
+            <a class="dropdown-item" href="#"><i class="far fa-calendar-alt"></i>  경기 일정</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown mx-3">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Board
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#"><i class="fas fa-bullhorn"></i>  회의록/공지사항</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-users"></i>  자유게시판</a>
+          </div>
+        </li>
+        
+        
+        <li class="nav-item active mx-3">
+          <span style="font-size: 1.3rem; cursor: pointer;" class="nav-link text-white" data-toggle="modal" data-target="#exampleModal">Login<span class="sr-only">(current)</span></span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex align-items-center">
+          <img style="height: 30px;margin-left: 1rem;" src="{% static 'images/round_symbol.jpg' %}" alt="">
+          <h5 style="margin-left: 1rem;" class="modal-title" id="exampleModalLabel">Ultras Gruppo THANATOS</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">아이디</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">비밀번호</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">아이디 기억하기</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dummy"></div>
+  {% block content %}
+  {% endblock %}
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+</body>
+</html>

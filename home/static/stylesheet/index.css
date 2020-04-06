@@ -1,0 +1,33 @@
+nav{
+    width: 100%;
+    background-color: rgb(35, 31, 32);
+  }
+nav img{
+    height: 5rem;
+  }
+nav a {
+    font-size: 1.3rem;
+  }
+.dummy{
+    height: 106px;
+  }
+footer{
+  background-color: rgb(35, 31, 32);
+}
+footer p {
+  font-family: 'Baloo Thambi 2', cursive;
+}
+aside{
+  height: 50px;
+}
+
+
+@media(min-width:591px) {
+  aside{
+    height: 100px;
+  }
+  .JoinUs{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}

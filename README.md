@@ -1,2 +1,2 @@
 # tnts08_django
-gruppo thanatos hompage renewal
+울트라스 그루포 타나토스의 홈페이지 리뉴얼 작업용 깃입니다. 

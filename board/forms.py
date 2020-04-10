@@ -8,12 +8,12 @@ class BoardForm(ModelForm) :
         fields = ['title','content']
 
         widget = {
-            'title' : TextInput(
-                attrs={
-                    'class' : 'form-control',
-                    'style' : 'width:100%',
-                    'placeholder' : 'press title',
-                }
-            ),
-            'content' : CharField(widget=CKEditorUploadingWidget())
+            # 'title' : TextInput(
+            #     attrs={
+            #         'class' : 'form-control',
+            #         'style' : 'width:100%',
+            #         'placeholder' : 'press title',
+            #     }
+            # ),
+            'content' : CharField(widget=CKEditorUploadingWidget(), label='')
         }

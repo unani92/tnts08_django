@@ -12,7 +12,7 @@ def index(request) :
         page = request.POST.get('search')    
     else : 
         page = request.GET.get('page')
-        
+
     try: 
         boards = paginator.page(page)
     except PageNotAnInteger : 
@@ -47,7 +47,12 @@ def create(request) :
     else : 
         form = BoardForm()
     context = {'form':form}
-    return render(request,'board/create.html',context)
+    return render(request,'board/form.html',context)
+
+def detail(request,pk) : 
+    board = get_object_or_404(Board,pk=pk)
+    context = {'board':board}
+    return render(request,'board/detail.html',context)    
 
 def update(request) : 
     pass

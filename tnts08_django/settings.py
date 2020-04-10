@@ -42,10 +42,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
-    'bootstrap4'
+    'bootstrap4',
+    'crispy_forms',
 ]
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+'default': {
+    'toolbar': None, #You can change this based on your requirements.
+    'width': 'auto',
+
+          },
+    }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

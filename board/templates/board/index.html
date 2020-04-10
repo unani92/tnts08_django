@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="container">
+        <table class="table my-5">
+            <thead>
+              <tr>
+                <th scope="col">글 번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성 시간</th>
+                <th scope="col">수정 시간</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for board in boards %}
+              <tr>
+                <td scope="row">{{board.pk}}</td>
+                <td>{{board.title}}</a></td>
+                <td>{{board.created_at}}</td>
+                <td>{{review.updated_at}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}

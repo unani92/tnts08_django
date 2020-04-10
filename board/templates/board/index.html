@@ -39,7 +39,20 @@
         
       {% if boards.number > 3  %}
         <li class="page-item"><a class="page-link text-dark" href="?page=1">1</a></li>
-        <li class="page-item"><a class='page-link text-dark'>...</a></li>
+        <li class="page-item">
+          <div class="dropdown">
+            <a class="page-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ...
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <form class="d-flex" action="" method="POST">
+                {% csrf_token %}
+                <input name="search" type="text">
+                <input type="submit" value="이동">
+              </form>
+            </div>
+          </div>
+        </li>
       {% endif %}
 
       {% for i in page_range %}
@@ -51,7 +64,20 @@
       {% endfor %}
 
       {% if boards.number < max_idx %}
-        <li ><a class='page-link text-dark'>...</a></li>
+        <li>
+          <div class="dropdown">
+            <a class="page-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ...
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <form class="d-flex" action="" method="POST">
+                {% csrf_token %}
+                <input name="search" type="text">
+                <input type="submit" value="이동">
+              </form>
+            </div>
+          </div>
+        </li>
         <li><a class="page-link text-dark" href="?page={{ max_idx|add:'2' }}">{{ max_idx|add:"2" }}</a></li> 
       {% endif %}
 
@@ -65,4 +91,5 @@
       {% endif %}
     </ul>
   {% endif %}
+
 {% endblock %}

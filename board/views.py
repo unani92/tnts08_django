@@ -6,9 +6,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 def index(request) : 
     boards_list = Board.objects.order_by('-pk')
-    paginator = Paginator(boards_list,1)
-    page = request.GET.get('page')
+    paginator = Paginator(boards_list,2)
 
+    if request.method == "POST" : 
+        page = request.POST.get('search')    
+    else : 
+        page = request.GET.get('page')
+        
     try: 
         boards = paginator.page(page)
     except PageNotAnInteger : 

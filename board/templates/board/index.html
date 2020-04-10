@@ -31,37 +31,37 @@
     <ul class="pagination justify-content-center">
       {% if boards.has_previous %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ boards.previous_page_number }}">Previous</a>
+          <a class="page-link text-dark" href="?page={{ boards.previous_page_number }}">이전</a>
         </li>
       {% else %}
-        <li class="page-item disabled"><a class='page-link'>Previous</a></li>
+        <li class="page-item disabled"><a class='page-link'>이전</a></li>
       {% endif %}
         
       {% if boards.number > 3  %}
-        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-        <li class="page-item"><span>...<span class="sr-only">...</span></span></li>
+        <li class="page-item"><a class="page-link text-dark" href="?page=1">1</a></li>
+        <li class="page-item"><a class='page-link text-dark'>...</a></li>
       {% endif %}
 
       {% for i in page_range %}
         {% if boards.number == i %}
-        <li class="page-item disabled"><a class='page-link'>{{ i }}</a></li>
+        <li class="page-item disabled"><a class='page-link bg-dark text-white'>{{ i }}</a></li>
         {% else %}
-        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        <li class="page-item"><a class="page-link text-dark" href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
       {% endfor %}
 
       {% if boards.number < max_idx %}
-        <li ><span>...<span class="sr-only">...</span></span></li>
-        <li><a class="page-link" href="?page={{ max_idx|add:'2' }}">{{ max_idx|add:"2" }}</a></li> 
+        <li ><a class='page-link text-dark'>...</a></li>
+        <li><a class="page-link text-dark" href="?page={{ max_idx|add:'2' }}">{{ max_idx|add:"2" }}</a></li> 
       {% endif %}
 
 
       {% if boards.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ boards.next_page_number }}">Next</a>
+          <a class="page-link text-dark" href="?page={{ boards.next_page_number }}">다음</a>
         </li>
         {% else %}
-        <li class="page-item disabled"><a class='page-link'>Next</a></li>
+        <li class="page-item disabled"><a class='page-link text-dark'>다음</a></li>
       {% endif %}
     </ul>
   {% endif %}

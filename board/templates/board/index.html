@@ -10,7 +10,6 @@
           <th scope="col">글 번호</th>
           <th scope="col">제목</th>
           <th scope="col">작성 시간</th>
-          <th scope="col">수정 시간</th>
         </tr>
       </thead>
       <tbody>
@@ -18,8 +17,7 @@
         <tr>
           <td scope="row">{{board.pk}}</td>
           <td><a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">{{board.title}}</a></td>
-          <td>{{board.created_at}}</td>
-          <td>{{board.updated_at}}</td>
+          <td>{{board.created_at|date:"y. n. j. G:i"}}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -28,6 +26,8 @@
   </div>
 
   {% if boards.has_other_pages %}
+  <nav class="bg-white container d-flex justify-content-center">
+    <a style='height: 42px; padding-top: 8px; padding-bottom: 8px;' class="mx-3 btn btn-secondary" href="{% url 'board:create' %}" role="button">새글쓰기</a>
     <ul class="pagination justify-content-center">
       {% if boards.has_previous %}
         <li class="page-item">
@@ -91,5 +91,6 @@
       {% endif %}
     </ul>
   {% endif %}
+  </nav>
 
 {% endblock %}

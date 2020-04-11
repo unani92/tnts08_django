@@ -5,7 +5,7 @@
 {% block content %}
 
 
-
+<div class='dummy'></div>
 <div class="container">
 {% if request.resolver_match.url_name == 'create' %}
     <h2>새 글쓰기</h2>
@@ -18,5 +18,6 @@
         {{ form | crispy }}
         <button class="btn btn-primary" type="submit">제출</button>
     </form>
+    <div class='dummy'></div>
 </div>
 {% endblock content %}

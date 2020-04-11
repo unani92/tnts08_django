@@ -54,8 +54,18 @@ def detail(request,pk) :
     context = {'board':board}
     return render(request,'board/detail.html',context)    
 
-def update(request) : 
-    pass
+def update(request,pk) : 
+    board = get_object_or_404(Board,pk=pk)
+    if request.method=='POST' : 
+        form = BoardForm(request.POST,instance=board)
+        if form.is_valid(): 
+            board = form.save()
+            return redirect('board:index')
+
+    else : 
+        form=BoardForm(instance=board)
+    context = {'form':form}
+    return render(request,'board/form.html',context)
 
 def delete(requets) : 
     pass

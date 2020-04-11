@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Board
 from .forms import BoardForm
+from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -67,5 +68,8 @@ def update(request,pk) :
     context = {'form':form}
     return render(request,'board/form.html',context)
 
-def delete(requets) : 
-    pass
+@require_POST
+def delete(requets,pk) : 
+    board = get_object_or_404(Board,pk=pk)
+    board.delete()
+    return redirect('board:index')

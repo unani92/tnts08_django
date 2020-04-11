@@ -23,9 +23,35 @@
   </div>
   
   <div class='d-flex mt-3'>
+    <a class="btn btn-dark mr-3" href="{% url 'board:index' %}" role="button">뒤로가기</a>
     <a class="btn btn-dark mr-3" href="{% url 'board:update' board.pk %}" role="button">수정하기</a>
-    <a class="btn btn-dark mx-3" href="#" role="button">삭제하기</a>
+    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal2">삭제하기</button>
   </div>
+
+  {% comment %} modal {% endcomment %}
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">삭제 확인</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          정말 삭제하시겠습니꽈?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">아니요</button>
+          <form action="{% url 'board:delete' board.pk %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">네</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class='dummy'></div>
 

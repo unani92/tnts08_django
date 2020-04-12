@@ -59,9 +59,21 @@ CKEDITOR_CONFIGS = {
         [ 'Styles', 'Format', 'Font', 'FontSize' ],
         [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
     ],
-    'extraPlugins':'codesnippet',
     'width': 'auto',
           },
+
+'special': {
+    'toolbar': 'Special', 
+    'toolbar_Special': [
+        [ 'CodeSnippet','Bold', 'Italic', 'Underline', 'Strike', '-', 'CopyFormatting', 'RemoveFormat' ],
+        [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
+        [ 'Styles', 'Format', 'Font', 'FontSize' ],
+        [ 'TextColor', 'BGColor' ],
+        [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
+    ],
+    'extraPlugins':'codesnippet',
+    'width': 'auto',
+          }
     }
 
 MIDDLEWARE = [

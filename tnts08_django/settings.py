@@ -52,9 +52,15 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
 'default': {
-    'toolbar': None, #You can change this based on your requirements.
+    'toolbar': 'Custom', 
+    'toolbar_Custom': [
+        [ 'Codesnippet','Bold', 'Italic', 'Underline', 'Strike', '-', 'CopyFormatting', 'RemoveFormat' ],
+        [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
+        [ 'Styles', 'Format', 'Font', 'FontSize' ],
+        [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
+    ],
+    'extraPlugins':'codesnippet',
     'width': 'auto',
-
           },
     }
 

@@ -52,9 +52,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
 'default': {
-    'toolbar': 'Custom', 
+    'toolbar': 'Custom',
     'toolbar_Custom': [
-        [ 'Codesnippet','Bold', 'Italic', 'Underline', 'Strike', '-', 'CopyFormatting', 'RemoveFormat' ],
+        ['Codesnippet','Bold', 'Italic', 'Underline', 'Strike', '-', 'CopyFormatting', 'RemoveFormat' ],
         [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
         [ 'Styles', 'Format', 'Font', 'FontSize' ],
         [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
@@ -63,15 +63,15 @@ CKEDITOR_CONFIGS = {
           },
 
 'special': {
-    'toolbar': 'Special', 
+    'toolbar': 'Special',
     'toolbar_Special': [
         [ 'CodeSnippet','Bold', 'Italic', 'Underline', 'Strike', '-', 'CopyFormatting', 'RemoveFormat' ],
-        [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar'],
+        [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Emoji', 'SpecialChar'],
         [ 'Styles', 'Format', 'Font', 'FontSize' ],
-        [ 'TextColor', 'BGColor' ],
+        [ 'TextColor','Youtube' ],
         [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
     ],
-    'extraPlugins':'codesnippet',
+    'extraPlugins':','.join(['codesnippet','youtube','emoji']),
     'width': 'auto',
           }
     }
@@ -155,7 +155,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')

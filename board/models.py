@@ -15,10 +15,11 @@ class Board(models.Model) :
             'plugin.js'
             ),
             (
-                'emoji',
-                '/static/board/ckeditor_plugins/emoji/',
-                'plugin.js'
-                )]
+            'html5video',
+            '/static/board/ckeditor_plugins/html5video/html5video/',
+            'plugin.js'
+            )
+            ]
         )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

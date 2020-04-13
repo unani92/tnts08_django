@@ -66,12 +66,12 @@ CKEDITOR_CONFIGS = {
     'toolbar': 'Special',
     'toolbar_Special': [
         [ 'CodeSnippet','Bold', 'Italic', 'Underline', 'Strike', '-', 'CopyFormatting', 'RemoveFormat' ],
-        [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Emoji', 'SpecialChar'],
+        [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar'],
         [ 'Styles', 'Format', 'Font', 'FontSize' ],
-        [ 'TextColor','Youtube' ],
+        [ 'TextColor','Youtube','Smiley','Html5video' ],
         [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'],
     ],
-    'extraPlugins':','.join(['codesnippet','youtube','emoji']),
+    'extraPlugins':','.join(['codesnippet','youtube','html5video']),
     'width': 'auto',
           }
     }

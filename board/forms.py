@@ -1,12 +1,27 @@
-from django.forms import ModelForm, CharField, ChoiceField
+from django import forms
 from .models import Board
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-c = [('공지','공지'),('일반','일반')]
-class BoardForm(ModelForm) : 
-    name = CharField(label='이름')
-    title = CharField(label='제목')
-    choice = ChoiceField(choices=c,label='')
+c = [('일반','일반'),('공지','공지')]
+class BoardForm(forms.ModelForm) : 
+    name = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':'이름을 입력하시오'
+            }
+        )
+    ) 
+    
+    title = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':'제목을 입력하시오'
+            }
+        ) 
+    )
+    choice = forms.ChoiceField(choices=c,label='')
     class Meta : 
         model = Board
         fields = ['choice','name','title','content']

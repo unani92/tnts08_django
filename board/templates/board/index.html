@@ -45,8 +45,7 @@
               ...
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <form class="d-flex" action="" method="POST">
-                {% csrf_token %}
+              <form class="d-flex" action="{% url 'board:index' %}" method="GET">
                 <input name="search" type="text">
                 <input type="submit" value="이동">
               </form>
@@ -70,8 +69,7 @@
               ...
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <form class="d-flex" action="" method="POST">
-                {% csrf_token %}
+              <form class="d-flex" action="{% url 'board:index' %}" method="GET">
                 <input name="search" type="text">
                 <input type="submit" value="이동">
               </form>

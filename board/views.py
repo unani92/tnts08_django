@@ -9,8 +9,8 @@ def index(request) :
     boards_list = Board.objects.order_by('-pk')
     paginator = Paginator(boards_list,2)
 
-    if request.method == "POST" : 
-        page = request.POST.get('search')    
+    if request.GET.get('search'):
+        page = request.GET.get('search')
     else : 
         page = request.GET.get('page')
 

@@ -3,6 +3,15 @@ from .models import MyUser
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 
 class MyUserCreationForm(UserCreationForm) : 
+    username = forms.CharField(
+        label='아이디',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'ID를 입력하세요'
+                }
+            )
+        )
     password1 = forms.CharField(
         label=("비밀번호"),
         strip=False,

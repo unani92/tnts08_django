@@ -5,9 +5,10 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
-def index(request) : 
-    boards_list = Board.objects.order_by('-pk')
-    paginator = Paginator(boards_list,2)
+def index(request) :
+    notices = Board.objects.filter(choice='공지').order_by('-pk')
+    boards_list = Board.objects.filter(choice='일반').order_by('-pk')
+    paginator = Paginator(boards_list,4)
 
     if request.GET.get('search'):
         page = request.GET.get('search')
@@ -32,6 +33,7 @@ def index(request) :
     page_range = list(paginator.page_range[start_idx:end_idx])
 
     context = {
+        'notices':notices,
         'boards':boards,
         'page_range':page_range,
         'max_idx':max_idx-2,

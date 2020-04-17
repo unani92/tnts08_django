@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from .models import MyUser
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 
 class MyUserCreationForm(UserCreationForm) : 
     password1 = forms.CharField(
@@ -19,3 +20,13 @@ class MyUserCreationForm(UserCreationForm) :
         strip=False,
         help_text=(''),
     )
+    address = forms.CharField(
+        label=("주소"),
+        widget=forms.TextInput(attrs={'placeholder': '주소를 입력하시오'}),
+        strip=False,
+        help_text=(''),
+    )
+    class Meta:
+        model = MyUser
+        fields = ("username",'first_name','email','address')
+        field_classes = {'username': UsernameField}

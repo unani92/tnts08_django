@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import MyUserCreationForm
+from django.contrib.auth.decorators import login_required
+from .forms import MyUserCreationForm, MyAuthenticationForm, MyUserChangeForm
 from .models import MyUser
 # Create your views here.
 
 def signup(request) : 
-    
+    if request.user.is_authenticated:
+        return redirect('board:index')
+
     if request.method == 'POST' : 
         form = MyUserCreationForm(request.POST)
         if form.is_valid() and request.POST.get('agree1') and request.POST.get('agree2'): 
@@ -18,6 +20,7 @@ def signup(request) :
 
     return render(request,'accounts/signup.html',context)
 
+@login_required
 def detail(request) : 
     if request.GET.get('firstname') : 
         search = request.GET.get('firstname')
@@ -29,14 +32,42 @@ def detail(request) :
     context = {'users':users}
     return render(request,'accounts/detail.html',context)
 
-def signin(request): 
+def signin(request):
+    if request.user.is_authenticated:
+        return redirect('board:index')
+
     if request.method == 'POST' : 
-        form = AuthenticationForm(request,request.POST)
+        form = MyAuthenticationForm(request,request.POST)
         if form.is_valid() : 
             login(request,form.get_user())
-            return redirect('board:index')
+            return redirect(request.GET.get('next') or 'board:index')
     else : 
-        form = AuthenticationForm()
+        form = MyAuthenticationForm()
     context = {'form':form}
-    return render(request,'accounts/login.html',context) 
+    return render(request,'accounts/login.html',context)
+
+@login_required
+def log_out(request):
+    logout(request)
+    return redirect('accounts:login')
+
+@login_required
+def delete(request) :
+    request.user.delete()
+    return redirect('/home/')
+
+@login_required()
+def update(request) :
+    if request.method=='POST' :
+        form = MyUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            f = MyUser.objects.get(username=request.user.username)
+            f.address = request.POST.get('address')
+            f.save()
+            return redirect('accounts:detail')
+    else :
+        form = MyUserChangeForm(instance=request.user)
+    context = {'form':form}
+    return render(request,'accounts/update.html',context)
 

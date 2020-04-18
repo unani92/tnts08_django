@@ -1,8 +1,23 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-
+{% load static %}
+{% block accounts %}
+  <link rel="stylesheet" href="{% static 'stylesheet/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
+{% endblock accounts %}
 {% block content %}
-  <h2 class="text-center mt-3">Board</h2>
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="title my-4 d-flex align-items-center">
+      <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
+      <h1 class="mb-0">Board</h1>
+    </div>
+    <div class="user">
+      <span>{{ request.user.first_name }} 님 환영합니다.</span>
+      <a href="{% url 'accounts:log_out' %}">로그아웃</a>
+    </div>
+  </div>
+  
+  
   <div class="container">
     <table class="table my-5">
       <thead>

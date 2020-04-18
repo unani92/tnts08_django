@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Board
 from .forms import BoardForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
+@login_required
 def index(request) :
     notices = Board.objects.filter(choice='공지').order_by('-pk')
     boards_list = Board.objects.filter(choice='일반').order_by('-pk')
@@ -41,6 +43,7 @@ def index(request) :
 
     return render(request, 'board/index.html', context)
 
+@login_required
 def create(request) : 
     if request.method == "POST" : 
         form = BoardForm(request.POST)    
@@ -52,11 +55,13 @@ def create(request) :
     context = {'form':form}
     return render(request,'board/form.html',context)
 
+@login_required
 def detail(request,pk) : 
     board = get_object_or_404(Board,pk=pk)
     context = {'board':board}
     return render(request,'board/detail.html',context)    
 
+@login_required
 def update(request,pk) : 
     board = get_object_or_404(Board,pk=pk)
     if request.method=='POST' : 
@@ -70,6 +75,7 @@ def update(request,pk) :
     context = {'form':form}
     return render(request,'board/form.html',context)
 
+@login_required
 @require_POST
 def delete(requets,pk) : 
     board = get_object_or_404(Board,pk=pk)

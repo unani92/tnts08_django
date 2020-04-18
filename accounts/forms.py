@@ -1,6 +1,7 @@
 from django import forms
 from .models import MyUser
-from django.contrib.auth.forms import UserCreationForm, UsernameField
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, UsernameField, AuthenticationForm, UserChangeForm
 
 class MyUserCreationForm(UserCreationForm) : 
     username = forms.CharField(
@@ -39,3 +40,30 @@ class MyUserCreationForm(UserCreationForm) :
         model = MyUser
         fields = ('first_name','email','address','username')
         field_classes = {'username': UsernameField}
+
+class MyAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        label=('ID'),
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': True,
+                'placeholder':'아이디'
+            }
+        )
+    )
+
+class MyUserChangeForm(UserChangeForm):
+    address = forms.CharField(
+        label=("주소"),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '주소를 입력하시오',
+
+            }
+        ),
+        strip=False,
+        help_text=(''),
+    )
+    class Meta:
+        model = MyUser
+        fields = ['username', 'first_name','address', 'email']

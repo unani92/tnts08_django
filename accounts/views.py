@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login,logout
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import MyUserCreationForm
 from .models import MyUser
 # Create your views here.
@@ -27,3 +28,15 @@ def detail(request) :
 
     context = {'users':users}
     return render(request,'accounts/detail.html',context)
+
+def signin(request): 
+    if request.method == 'POST' : 
+        form = AuthenticationForm(request,request.POST)
+        if form.is_valid() : 
+            login(request,form.get_user())
+            return redirect('board:index')
+    else : 
+        form = AuthenticationForm()
+    context = {'form':form}
+    return render(request,'accounts/login.html',context) 
+

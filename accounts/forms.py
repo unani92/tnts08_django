@@ -37,5 +37,5 @@ class MyUserCreationForm(UserCreationForm) :
     )
     class Meta:
         model = MyUser
-        fields = ("username",'first_name','email','address')
+        fields = ('first_name','email','address','username')
         field_classes = {'username': UsernameField}

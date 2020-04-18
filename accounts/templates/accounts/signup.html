@@ -1,14 +1,34 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
+{% block accounts %}
+<link rel="stylesheet" href="{% static 'stylesheet/style.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
+{% endblock accounts %}
 
 {% block content %}
-
 <div class="container">
+  <div class="title my-4 d-flex align-items-center">
+    <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
+    <h1 class="mb-0">Join Us</h1>
+  </div>
+</div>
+<div class="container p-3">
   <form action="" method="post">
       {% csrf_token %}
       {% bootstrap_form form %}
-      <button class="btn btn-dark" type="submit">Join Us</button>
+      <div class="row align-items-center mx-0">
+        <div class="my-0 form-group form-check col-5">
+          <input type="checkbox" class="form-check-input" id="Check1">
+          <label class="form-check-label" for="Check1">가입 승인 이후 활동 가능합니다.</label>
+        </div>
+        <div class="my-0 form-group form-check col-5">
+          <input type="checkbox" class="form-check-input" id="Check2">
+          <label class="form-check-label" for="Check2">개인정보 수집 및 활용에 동의합니다.</label>
+        </div>
+        <button class="btn btn-dark col-2" type="submit">Join Us</button>
+      </div>
   </form>
 </div>
-
+<div class="bottom"></div>
 {% endblock %}

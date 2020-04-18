@@ -53,12 +53,20 @@ class MyAuthenticationForm(AuthenticationForm):
     )
 
 class MyUserChangeForm(UserChangeForm):
+    username = UsernameField(
+        label=('ID'),
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': True,
+                'placeholder': '아이디'
+            }
+        )
+    )
     address = forms.CharField(
         label=("주소"),
         widget=forms.TextInput(
             attrs={
                 'placeholder': '주소를 입력하시오',
-
             }
         ),
         strip=False,

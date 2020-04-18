@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.views.decorators.http import require_POST
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from .forms import MyUserCreationForm, MyAuthenticationForm, MyUserChangeForm
@@ -58,16 +59,16 @@ def delete(request) :
 
 @login_required()
 def update(request) :
+    user = MyUser.objects.get(username=request.user.username)
     if request.method=='POST' :
-        form = MyUserChangeForm(request.POST, instance=request.user)
+        form = MyUserChangeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            f = MyUser.objects.get(username=request.user.username)
-            f.address = request.POST.get('address')
-            f.save()
+
             return redirect('accounts:detail')
     else :
-        form = MyUserChangeForm(instance=request.user)
+        form = MyUserChangeForm(instance=user)
     context = {'form':form}
     return render(request,'accounts/update.html',context)
+
 

@@ -14,6 +14,7 @@
     <div class="user">
       <span>{{ request.user.first_name }} 님 환영합니다.</span>
       <a href="{% url 'accounts:log_out' %}">로그아웃</a>
+      <a href="{% url 'accounts:update' %}">회원정보</a>
     </div>
   </div>
   

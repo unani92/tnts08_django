@@ -6,18 +6,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
 {% endblock accounts %}
 {% block content %}
+  {% if messages %}
+    <div class="alert alert-secondary" role="alert">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
   <div class="container d-flex justify-content-between align-items-center">
     <div class="title my-4 d-flex align-items-center">
-      <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
+      <img class="round_symbol mr-5" src="{% static 'images/sasin.png' %}">
       <h1 class="mb-0">Board</h1>
     </div>
     <div class="user">
-      <span>{{ request.user.first_name }} 님 환영합니다.</span>
-      <a href="{% url 'accounts:log_out' %}">로그아웃</a>
-      <a href="{% url 'accounts:update' %}">회원정보</a>
+      <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        {{ request.user.first_name }}
+      </a>님 환영합니다.
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:create' %}">새글쓰기</a>
+          <a style="text-decoration: none; color: #0E2231;" href="{% url 'accounts:update' %}">회원정보 수정하기</a>
+          <a style="text-decoration: none; color: #0E2231;" href="{% url 'accounts:log_out' %}">로그아웃</a>
+        </div>
+      </div>
     </div>
   </div>
-  
+
   
   <div class="container">
     <table class="table my-5">

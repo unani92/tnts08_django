@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
@@ -15,6 +16,7 @@ def signup(request) :
         if form.is_valid() and request.POST.get('agree1') and request.POST.get('agree2'): 
             form.save()
             return redirect('board:index')
+        messages.warning(request, '모든 입력란을 기재해야 합니다. 혹시 체크박스에 동의는 하셨나요?')
     else : 
         form = MyUserCreationForm()
     context = {'form':form}
@@ -41,7 +43,7 @@ def signin(request):
         form = MyAuthenticationForm(request,request.POST)
         if form.is_valid() : 
             login(request,form.get_user())
-            return redirect(request.GET.get('next') or 'board:index')
+            return redirect(request.GET.get('next') or 'home:main')
     else : 
         form = MyAuthenticationForm()
     context = {'form':form}
@@ -50,7 +52,7 @@ def signin(request):
 @login_required
 def log_out(request):
     logout(request)
-    return redirect('accounts:login')
+    return redirect('home:main')
 
 @login_required
 def delete(request) :

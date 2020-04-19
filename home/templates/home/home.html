@@ -6,7 +6,7 @@
       <div class="carousel-inner">
         <div class="carousel-item active" data-interval="10000">
           <img src="{% static 'images/daegu.jpg' %}" class="d-block w-100" alt="...">
-        </div>
+        </div>          
         <div class="carousel-item" data-interval="2000">
           <img src="{% static 'images/suwon.jpg' %}" class="d-block w-100" alt="...">
         </div>
@@ -55,7 +55,7 @@
     
     <aside class="w-100 d-flex align-items-center justify-content-around">
       <div>
-        <a class="text-decoration-none text-dark"  href="#"><span class="JoinUs"><i class="fas fa-user-plus"></i>  Join Us</span></a>
+        <a class="text-decoration-none text-dark"  href="{% url 'accounts:signup' %}"><span class="JoinUs"><i class="fas fa-user-plus"></i>  Join Us</span></a>
       </div>
       <div>
         <a class="text-decoration-none text-dark"  href="https://www.facebook.com/GruppoTHANATOS/"><span class="JoinUs"><i class="fab fa-facebook-square"></i>  Facebook</span></a>

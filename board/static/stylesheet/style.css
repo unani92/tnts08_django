@@ -11,3 +11,8 @@ h1 {
 .bottom {
     height: 50px;
 }
+.user a{
+    text-decoration: none;
+    font-weight: bold;
+
+}

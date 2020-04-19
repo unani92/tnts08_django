@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Board
 from .forms import BoardForm
 from django.views.decorators.http import require_POST
@@ -49,6 +50,7 @@ def create(request) :
         form = BoardForm(request.POST)    
         if form.is_valid():
             board = form.save()
+            messages.success(request,'새 글이 등록되었습니다.')
             return redirect('board:index')
     else : 
         form = BoardForm()
@@ -68,6 +70,7 @@ def update(request,pk) :
         form = BoardForm(request.POST,instance=board)
         if form.is_valid(): 
             board = form.save()
+            messages.success(request, '게시글이 수정되었습니다.')
             return redirect('board:index')
 
     else : 

@@ -18,7 +18,7 @@
   {% endif %}
   <div class="container d-flex justify-content-between align-items-center">
     <div class="title my-4 d-flex align-items-center">
-      <img class="round_symbol mr-5" src="{% static 'images/sasin.png' %}">
+      <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
       <h1 class="mb-0">Board</h1>
     </div>
     <div class="user">
@@ -49,7 +49,7 @@
         {% if boards.number == 1 %}
           {% for notice in notices %}
             <tr>
-              <td scope="row">{{notice.choice}}</td>
+              <td scope="row"><h5 class="badge badge-secondary">{{notice.choice}}</h5></td>
               <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' notice.pk %}">{{notice.title}}</a></td>
               <td>{{notice.created_at|date:"y. n. j. G:i"}}</td>
             </tr>

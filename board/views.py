@@ -47,10 +47,13 @@ def index(request) :
 @login_required
 def create(request) : 
     if request.method == "POST" : 
-        form = BoardForm(request.POST)    
+        form = BoardForm(request.POST)
         if form.is_valid():
             board = form.save()
+            board.name=request.user.first_name
+            board.save()
             messages.success(request,'새 글이 등록되었습니다.')
+
             return redirect('board:index')
     else : 
         form = BoardForm()
@@ -70,7 +73,7 @@ def update(request,pk) :
         form = BoardForm(request.POST,instance=board)
         if form.is_valid(): 
             board = form.save()
-            messages.success(request, '게시글이 수정되었습니다.')
+            messages.success(request,'게시글이 수정되었습니다.')
             return redirect('board:index')
 
     else : 

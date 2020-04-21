@@ -76,8 +76,11 @@ def update(request,pk) :
             messages.success(request,'게시글이 수정되었습니다.')
             return redirect('board:index')
 
-    else : 
-        form=BoardForm(instance=board)
+    else :
+        if board.name == request.user.first_name :
+            form=BoardForm(instance=board)
+        else :
+            return redirect('board:index')
     context = {'form':form}
     return render(request,'board/form.html',context)
 

@@ -35,6 +35,17 @@ class MyUserCreationForm(UserCreationForm) :
         strip=False,
         help_text=(''),
     )
+    profile = forms.ImageField(
+        label=("프로필 사진"),
+        widget=forms.FileInput(
+            attrs={
+                'style': 'padding:0; height:32px;',
+                'class': 'form-control'
+
+            }
+        ),
+        help_text='프로필사진을 등록해주세요',
+    )
     class Meta:
         model = MyUser
         fields = ('profile','first_name','email','address','username')
@@ -73,4 +84,4 @@ class MyUserChangeForm(UserChangeForm):
     )
     class Meta:
         model = MyUser
-        fields = ['username', 'first_name','address', 'email']
+        fields = ['profile','username', 'first_name','address', 'email']

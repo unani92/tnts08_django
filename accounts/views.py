@@ -64,7 +64,10 @@ def delete(request) :
 def update(request) :
     user = MyUser.objects.get(username=request.user.username)
     if request.method=='POST' :
-        form = MyUserChangeForm(request.POST, instance=user)
+        form = MyUserChangeForm(request.POST, request.FILES ,instance=user)
+        user.profile.delete()
+        form.profile = request.FILES['profile']
+
         if form.is_valid():
             form.save()
 

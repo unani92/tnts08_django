@@ -17,13 +17,14 @@
       </button>
     </div>
   {% endif %}
+  <div class="board_dummy"></div>
   <div class="container d-flex justify-content-between align-items-center">
     <div class="title my-4 d-flex align-items-center">
       <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
       <h1 class="mb-0">Board</h1>
     </div>
     <div class="user">
-      <img style="width: 75px;height: 75px;" class="rounded-circle" src="{{ request.user.profile.url }}" alt="">
+      <img style="width: 50px;height: 50px;" class="profile rounded-circle" src="{{ request.user.profile.url }}" alt="">
       <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         {{ request.user.first_name }}
       </a>님 환영합니다.

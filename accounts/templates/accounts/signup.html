@@ -27,6 +27,7 @@
   <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form %}
+
       <div class="row align-items-center mx-0">
         <div class="my-0 form-group form-check col-5">
           <input type="checkbox" class="form-check-input" id="Check1" name='agree1'>
@@ -34,7 +35,7 @@
         </div>
         <div class="my-0 form-group form-check col-5">
           <input type="checkbox" class="form-check-input" id="Check2" name='agree2'>
-          <label class="form-check-label" for="Check2">개인정보 수집 및 활용에 동의합니다.</label>
+          <label class="form-check-label" for="Check2">개인정보 수집, 활용에 동의합니다.</label>
         </div>
         <button class="btn btn-dark col-2" type="submit">Join Us</button>
       </div>

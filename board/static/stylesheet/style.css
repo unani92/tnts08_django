@@ -15,9 +15,18 @@ h1 {
     text-decoration: none;
     font-weight: bold;
 }
+.board_dummy{
+    height: 50px;
+}
 .board_title {
     font-family: 'Noto Sans KR', sans-serif;
 }
 td{
     font-family: 'Noto Sans KR', sans-serif;
+}
+
+@media (max-width: 500px) {
+    .profile{
+        display: none;
+    }
 }

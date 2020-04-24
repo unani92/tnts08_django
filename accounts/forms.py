@@ -1,6 +1,5 @@
 from django import forms
 from .models import MyUser
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField, AuthenticationForm, UserChangeForm
 
 class MyUserCreationForm(UserCreationForm) : 
@@ -38,7 +37,7 @@ class MyUserCreationForm(UserCreationForm) :
     )
     class Meta:
         model = MyUser
-        fields = ('first_name','email','address','username')
+        fields = ('profile','first_name','email','address','username')
         field_classes = {'username': UsernameField}
 
 class MyAuthenticationForm(AuthenticationForm):

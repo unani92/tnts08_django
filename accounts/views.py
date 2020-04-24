@@ -12,7 +12,8 @@ def signup(request) :
         return redirect('board:index')
 
     if request.method == 'POST' : 
-        form = MyUserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST,request.FILES)
+        form.profile = request.FILES['profile']
         if form.is_valid() and request.POST.get('agree1') and request.POST.get('agree2'): 
             form.save()
             return redirect('board:index')

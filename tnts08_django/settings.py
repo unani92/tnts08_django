@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'bootstrap4',
     'crispy_forms',
+
 ]
 
 
@@ -161,3 +162,5 @@ STATIC_ROOT = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+AUTH_USER_MODEL = 'accounts.MyUser'

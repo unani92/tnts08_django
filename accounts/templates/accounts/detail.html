@@ -37,6 +37,7 @@
       <td>{{user.first_name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.address}}</td>
+      <img style="width: 50px;height: 50px;" class="rounded-circle" src="{{ user.profile.url }}" alt="">
     </tr>
     {% endfor %}
   </tbody>

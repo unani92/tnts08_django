@@ -90,3 +90,9 @@ def delete(requets,pk) :
     board = get_object_or_404(Board,pk=pk)
     board.delete()
     return redirect('board:index')
+
+
+from django import template
+from django.template.defaultfilters import stringfilter
+
+register = template.Library()

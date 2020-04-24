@@ -54,14 +54,14 @@
             <tr>
               <td scope="row"><h5 class="badge badge-secondary">{{notice.choice}}</h5></td>
               <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' notice.pk %}">{{notice.title}}</a></td>
-              <td>{{notice.created_at|date:"y. n. j. G:i"}}</td>
+              <td>{{notice.created_at|timesince}} 전</td>
             </tr>
           {% endfor %}
           {% for board in boards %}
             <tr>
               <td scope="row">{{board.pk}}</td>
               <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">{{board.title}}</a></td>
-              <td>{{board.created_at|date:"y. n. j. G:i"}}</td>
+              <td>{{ board.created_at | timesince }} 전</td>
             </tr>
           {% endfor %}
         {% else %}

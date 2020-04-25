@@ -20,7 +20,7 @@
             <div class="collapse" id="collapseDetail">
               <div class="card card-body">
                 <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:update' board.pk %}">수정하기</a>
-                <a style="text-decoration: none; color: #0E2231;" href="{% url 'accounts:update' %}">삭제하</a>
+                <a style="text-decoration: none; color: #0E2231;" href="" data-toggle="modal" data-target="#exampleModal2">삭제하기</a>
               </div>
             </div>
           {% else %}
@@ -37,18 +37,9 @@
         <div>
           {{board.content|safe}}
         </div>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
-
-  {% if  board.name  == request.user.first_name %}
-  <div class='d-flex mt-3'>
-    <a class="btn btn-dark mr-3" href="{% url 'board:index' %}" role="button">뒤로가기</a>
-    <a class="btn btn-dark mr-3" href="{% url 'board:update' board.pk %}" role="button">수정하기</a>
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal2">삭제하기</button>
-  </div>
-  {% endif %}
 
   {% comment %} modal {% endcomment %}
   <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

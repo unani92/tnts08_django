@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Board
-from .forms import BoardForm
+from .forms import BoardForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -63,7 +63,11 @@ def create(request) :
 @login_required
 def detail(request,pk) : 
     board = get_object_or_404(Board,pk=pk)
-    context = {'board':board}
+    commentform = CommentForm()
+    context = {
+        'board':board,
+        'commentform':commentform,
+    }
     return render(request,'board/detail.html',context)    
 
 @login_required
@@ -91,8 +95,13 @@ def delete(requets,pk) :
     board.delete()
     return redirect('board:index')
 
-
-from django import template
-from django.template.defaultfilters import stringfilter
-
-register = template.Library()
+@login_required
+def CommentCreate(request,board_pk):
+    board = get_object_or_404(Board,pk=board_pk)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.name = request.user
+        comment.board = board
+        comment.save()
+        return redirect('board:detail',board.pk)

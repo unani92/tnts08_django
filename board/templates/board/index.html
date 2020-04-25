@@ -23,8 +23,8 @@
       <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
       <h1 class="mb-0">Board</h1>
     </div>
-    <div class="user">
-      <img style="width: 50px;height: 50px;" class="profile rounded-circle" src="{{ request.user.profile.url }}" alt="">
+    <div class="user profile">
+      <img style="width: 50px;height: 50px;" class="rounded-circle" src="{{ request.user.profile.url }}" alt="">
       <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         {{ request.user.first_name }}
       </a>님 환영합니다.
@@ -55,7 +55,11 @@
             <tr>
               <td scope="row"><h5 class="badge badge-secondary">{{notice.choice}}</h5></td>
               <td>{{notice.name}}</td>
-              <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' notice.pk %}">{{notice.title}}</a></td>
+              <td style='font-weight:bold;'>
+                <a class="text-dark text-decoration-none" href="{% url 'board:detail' notice.pk %}">
+                  <span>{{notice.title}}    ({{ notice.comment_set.count }})</span>
+                </a>
+              </td>
               <td>{{notice.created_at|timesince}} 전</td>
             </tr>
           {% endfor %}
@@ -63,7 +67,11 @@
             <tr>
               <td scope="row">{{board.pk}}</td>
               <td>{{board.name}}</td>
-              <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">{{board.title}}</a></td>
+              <td style='font-weight:bold;'>
+                <a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">
+                  <span>{{board.title}}    ({{ board.comment_set.count }})</span>
+                </a>
+              </td>
               <td>{{ board.created_at | timesince }} 전</td>
             </tr>
           {% endfor %}
@@ -72,7 +80,11 @@
             <tr>
               <td scope="row">{{board.pk}}</td>
               <td>{{board.name}}</td>
-              <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">{{board.title}}</a></td>
+              <td style='font-weight:bold;'>
+                <a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">
+                  <span>{{board.title}}    ({{ board.comment_set.count }})</span>
+                </a>
+              </td>
               <td>{{board.created_at|date:"y. n. j. G:i"}}</td>
             </tr>
           {% endfor %}

@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 # Create your models here.
 class Board(models.Model) :
     name = models.CharField(max_length=10)
@@ -22,4 +23,9 @@ class Board(models.Model) :
         )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
 

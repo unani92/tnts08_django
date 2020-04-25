@@ -41,6 +41,37 @@
     </div>
   </div>
 
+  <div class="container">
+    <h3>댓글 : {{ board.comment_set.count }}</h3>
+
+      {% for comment in board.comment_set.all %}
+        <div class="card">
+          <div class="card-header">
+            <img style="width: 50px;height: 50px;" class="rounded-circle" src="{{ comment.name.profile.url }}" alt="">
+            <h4>{{ comment.name.first_name }}</h4>
+          </div>
+          <div class="card-body">
+            <p>{{ comment.content }}</p>
+          </div>
+        </div>
+
+    {% empty %}
+      <span>댓글이 없습니다. 첫 댓의 주인공이 되어주세요</span>
+    {% endfor %}
+  </div>
+
+
+
+
+  {#  comment form #}
+  <div class="container">
+    <form action="{% url 'board:comment_create' board.pk %}" method="post">
+      {% csrf_token %}
+      {% bootstrap_form commentform %}
+      <button class="btn btn-dark" type="submit">댓글달기</button>
+    </form>
+  </div>
+
   {% comment %} modal {% endcomment %}
   <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

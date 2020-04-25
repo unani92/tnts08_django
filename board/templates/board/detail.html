@@ -6,37 +6,40 @@
    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
 {% endblock %}
 {% block content %}
-<div class='dummy'></div>
-<div class="container">
-  <div class="d-flex flex-column">
-    <div class='mb-3 border-bottom border-dark d-flex justify-content-between'>
-      <h3 class="board_title">
-        {{board.title}}
-      </h3>
-      <div class="d-flex flex-column">
-        <span>작성 : {{board.created_at|date:"y. n. j. G:i"}}</span>
+  <div class='dummy'></div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{ board.title }}</h5>
+        <div class="id_created_at d-flex flex-column">
+          {% if request.user.first_name == board.name %}
+            <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseExample">
+              {{ board.name }}
+            </a>
+            <div class="collapse" id="collapseDetail">
+              <div class="card card-body">
+                <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:update' board.pk %}">수정하기</a>
+                <a style="text-decoration: none; color: #0E2231;" href="" data-toggle="modal" data-target="#exampleModal2">삭제하기</a>
+              </div>
+            </div>
+          {% else %}
+            <div>{{ board.name }}</div>
+          {% endif %}
+
+          <div>{{ board.created_at }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <img src="/media/{{board.image}}" alt="">
+        </div>
+        <div>
+          {{board.content|safe}}
+        </div>
       </div>
     </div>
   </div>
-  <div>
-    {{ board.name }}
-  </div>
-  <div class='my-5'>
-    <div>
-      <img style='max-width: 100% !important; height: auto !important;' src="/media/{{board.image}}" alt="">
-    </div>
-    <div>
-      {{board.content|safe}}
-    </div>
-  </div>
-
-  {% if  board.name  == request.user.first_name %}
-  <div class='d-flex mt-3'>
-    <a class="btn btn-dark mr-3" href="{% url 'board:index' %}" role="button">뒤로가기</a>
-    <a class="btn btn-dark mr-3" href="{% url 'board:update' board.pk %}" role="button">수정하기</a>
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal2">삭제하기</button>
-  </div>
-  {% endif %}
 
   {% comment %} modal {% endcomment %}
   <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

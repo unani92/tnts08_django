@@ -44,6 +44,7 @@
       <thead>
         <tr>
           <th scope="col">글 번호</th>
+          <th scope="col">작성자</th>
           <th scope="col">제목</th>
           <th scope="col">작성 시간</th>
         </tr>
@@ -53,6 +54,7 @@
           {% for notice in notices %}
             <tr>
               <td scope="row"><h5 class="badge badge-secondary">{{notice.choice}}</h5></td>
+              <td>{{notice.name}}</td>
               <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' notice.pk %}">{{notice.title}}</a></td>
               <td>{{notice.created_at|timesince}} 전</td>
             </tr>
@@ -60,6 +62,7 @@
           {% for board in boards %}
             <tr>
               <td scope="row">{{board.pk}}</td>
+              <td>{{board.name}}</td>
               <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">{{board.title}}</a></td>
               <td>{{ board.created_at | timesince }} 전</td>
             </tr>
@@ -68,6 +71,7 @@
           {% for board in boards %}
             <tr>
               <td scope="row">{{board.pk}}</td>
+              <td>{{board.name}}</td>
               <td style='font-weight:bold;'><a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">{{board.title}}</a></td>
               <td>{{board.created_at|date:"y. n. j. G:i"}}</td>
             </tr>

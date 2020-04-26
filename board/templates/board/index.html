@@ -21,7 +21,7 @@
   <div class="container d-flex justify-content-between align-items-center">
     <div class="title my-4 d-flex align-items-center">
       <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
-      <h1 class="mb-0">Board</h1>
+      <h2 class="mb-0">Board</h2>
     </div>
     <div class="user profile">
       <img style="width: 50px;height: 50px;" class="rounded-circle" src="{{ request.user.profile.url }}" alt="">
@@ -37,13 +37,21 @@
       </div>
     </div>
   </div>
-
   
   <div class="container">
+
+    <div  aria-label="breadcrumb">
+      <ol class="bg-white breadcrumb">
+        <li class="breadcrumb-item"><a class="text-dark font-weight-bold" href="{% url 'home:main' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Board</li>
+        <li class="breadcrumb-item"><a class="text-dark font-weight-bold" href="{% url 'board:create' %}">Create</a></li>
+      </ol>
+    </div>
+
     <table class="table my-5">
       <thead>
         <tr>
-          <th scope="col">글 번호</th>
+          <th scope="col">no</th>
           <th scope="col">작성자</th>
           <th scope="col">제목</th>
           <th scope="col">작성 시간</th>

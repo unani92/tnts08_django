@@ -48,11 +48,11 @@
       </ol>
     </div>
 
-    <form action="" method="get">
+    <form action="{% url 'board:search' %}" method="get">
       <div class="form-row align-items-center">
         <div class="col-auto my-1">
           <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+          <select name="choose" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             <option selected>Choose...</option>
             <option value="1">제목</option>
             <option value="2">작성자</option>
@@ -61,7 +61,7 @@
         </div>
         <div class="col-auto my-1">
           <div class="custom-control custom-checkbox mr-sm-2">
-            <input type="text" class="form-control">
+            <input type="text" name="keyword" class="form-control">
           </div>
         </div>
         <div class="col-auto my-1">

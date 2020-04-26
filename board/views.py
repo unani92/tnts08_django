@@ -105,3 +105,16 @@ def CommentCreate(request,board_pk):
         comment.board = board
         comment.save()
         return redirect('board:detail',board.pk)
+
+def search(request):
+    keyword = request.GET.get('keyword')
+    if request.GET.get('choose') == '제목':
+        boards = Board.objects.filter(title__contains=keyword)
+    elif request.GET.get('choose') == '아이디':
+        boards = Board.objects.filter(name__exact=keyword)
+    else :
+        boards = Board.objects.filter(content__contains=keyword)
+
+    context = {'boards':boards}
+
+    return render(request,'board/index.html',context)

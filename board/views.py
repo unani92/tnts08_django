@@ -108,9 +108,9 @@ def CommentCreate(request,board_pk):
 
 def search(request):
     keyword = request.GET.get('keyword')
-    if request.GET.get('choose') == '제목':
+    if request.GET.get('choose') == 'title':
         boards = Board.objects.filter(title__contains=keyword)
-    elif request.GET.get('choose') == '아이디':
+    elif request.GET.get('choose') == 'name':
         boards = Board.objects.filter(name__exact=keyword)
     else :
         boards = Board.objects.filter(content__contains=keyword)

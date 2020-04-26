@@ -48,7 +48,29 @@
       </ol>
     </div>
 
-    <table class="table my-5">
+    <form action="" method="get">
+      <div class="form-row align-items-center">
+        <div class="col-auto my-1">
+          <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option selected>Choose...</option>
+            <option value="1">제목</option>
+            <option value="2">작성자</option>
+            <option value="3">내용</option>
+          </select>
+        </div>
+        <div class="col-auto my-1">
+          <div class="custom-control custom-checkbox mr-sm-2">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-auto my-1">
+          <i type="submit" class="fas fa-search"></i>
+        </div>
+      </div>
+    </form>
+
+    <table class="table my-2">
       <thead>
         <tr>
           <th scope="col">no</th>
@@ -167,5 +189,5 @@
     </ul>
   {% endif %}
   </nav>
-
+  <div class="board_dummy"></div>
 {% endblock %}

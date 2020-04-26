@@ -76,5 +76,3 @@ def update(request) :
         form = MyUserChangeForm(instance=user)
     context = {'form':form}
     return render(request,'accounts/update.html',context)
-
-

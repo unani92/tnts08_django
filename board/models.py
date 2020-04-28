@@ -24,9 +24,21 @@ class Board(models.Model) :
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='like_boards'
+    )
+    dislike_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='dislike_boards'
+    )
+
 class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
-    name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     content = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

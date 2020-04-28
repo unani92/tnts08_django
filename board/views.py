@@ -118,3 +118,21 @@ def search(request):
     context = {'boards':boards}
 
     return render(request,'board/index.html',context)
+
+def like(request,pk):
+    board = get_object_or_404(Board,pk=pk)
+    if request.user not in board.like_users.all() and request.user not in board.dislike_users.all():
+        board.like_users.add(request.user)
+    else :
+        board.dislike_users.remove(request.user)
+        board.like_users.add(request.user)
+    return redirect('board:detail', board.pk)
+
+def dislike(request,pk):
+    board = get_object_or_404(Board,pk=pk)
+    if request.user not in board.like_users.all() and request.user not in board.dislike_users.all():
+        board.dislike_users.add(request.user)
+    else :
+        board.like_users.remove(request.user)
+        board.dislike_users.add(request.user)
+    return redirect('board:detail',board.pk)

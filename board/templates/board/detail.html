@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% load static %}
 {% block accounts %}
-   <link rel="stylesheet" href="{% static 'stylesheet/style.css' %}">
+   <link rel="stylesheet" href="{% static 'stylesheet/style_board.css' %}">
    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
 {% endblock %}
 {% block content %}
@@ -19,7 +19,12 @@
   <div class="container">
     <div class="card">
       <div class="card-header header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">{{ board.title }}</h5>
+        <div class="d-flex">
+          <h5 class="board_title mb-0 mx-3">{{ board.title }}</h5>
+          <div>
+            {% include "_like.html" %}
+          </div>
+        </div>
         <div class="id_created_at d-flex flex-column">
           {% if request.user.first_name == board.name %}
             <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -35,7 +40,7 @@
             <div>{{ board.name }}</div>
           {% endif %}
 
-          <div>{{ board.created_at }}</div>
+          <div>{{ board.created_at | timesince }} 전</div>
         </div>
       </div>
       <div class="card-body">

@@ -1,0 +1,44 @@
+{% if request.user not in board.like_users.all %}
+  {% if request.user not in board.dislike_users.all %}
+    <div class="d-flex">
+      <div class="mx-3">
+        <a href="{% url 'board:like' board.pk %}">
+          <i style="color: #3D3D3D" class="fas fa-thumbs-up"></i>
+        </a>
+        {{ board.like_users.all.count }}
+      </div>
+      <div>
+        <a href="{% url 'board:dislike' board.pk %}">
+          <i style="color: #3D3D3D" class="fas fa-thumbs-down"></i>
+        </a>
+        {{ board.dislike_users.all.count }}
+      </div>
+    </div>
+  {% else %}
+    <div class="d-flex">
+      <div class="mx-3">
+        <a href="{% url 'board:like' board.pk %}">
+          <i style="color: #3D3D3D" class="fas fa-thumbs-up"></i>
+        </a>
+        {{ board.like_users.all.count }}
+      </div>
+      <div>
+        <i style="color: #3D3D3D" class="fas fa-thumbs-down"></i>
+        {{ board.dislike_users.all.count }}
+      </div>
+    </div>
+  {% endif %}
+{% else %}
+  <div class="d-flex">
+    <div class="mx-3">
+      <i style="color: #3D3D3D" class="fas fa-thumbs-up"></i>
+      {{ board.like_users.all.count }}
+    </div>
+    <div>
+      <a href="{% url 'board:dislike' board.pk %}">
+        <i style="color: #3D3D3D" class="fas fa-thumbs-down"></i>
+      </a>
+      {{ board.dislike_users.all.count }}
+    </div>
+  </div>
+{% endif %}

@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% load static %}
 {% block accounts %}
-  <link rel="stylesheet" href="{% static 'stylesheet/style.css' %}">
+  <link rel="stylesheet" href="{% static 'stylesheet/style_board.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
 {% endblock accounts %}
@@ -49,23 +49,24 @@
     </div>
 
     <form action="{% url 'board:search' %}" method="get">
-      <div class="form-row align-items-center">
+      <div class="d-flex form-row align-items-center">
         <div class="col-auto my-1">
           <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
           <select name="choose" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-            <option selected>Choose...</option>
+            <option selected>검색기준</option>
             <option value="title">제목</option>
             <option value="name">작성자</option>
             <option value="content">내용</option>
           </select>
         </div>
-        <div class="col-auto my-1">
-          <div class="custom-control custom-checkbox mr-sm-2">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Username</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i type="submit" class="fas fa-search"></i></div>
+            </div>
             <input type="text" name="keyword" class="form-control">
           </div>
-        </div>
-        <div class="col-auto my-1">
-          <i type="submit" class="fas fa-search"></i>
         </div>
       </div>
     </form>

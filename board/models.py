@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
+from datetime import datetime
 # Create your models here.
 class Board(models.Model) :
     name = models.CharField(max_length=10)
@@ -33,6 +34,9 @@ class Board(models.Model) :
         related_name='dislike_boards'
     )
     hit = models.IntegerField(default=0)
+
+    def is_updated(self):
+        return datetime.now().day - self.updated_at.day <= 1
 
 class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)

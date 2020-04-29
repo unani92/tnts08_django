@@ -20,30 +20,36 @@
     <div class="card">
       <div class="card-header header ">
         <div class="row justify-content-between">
-          <div class="col-9">
-            <h5 class="board_title mb-0 mx-2">{{ board.title }}</h5>
+          <div class="col-9 px-0 d-flex align-items-center">
+            <h5 class="board_title mb-0 mx-3">{{ board.title }}</h5>
           </div>
-          <div class="col-3">
-            {% include "_like.html" %}
+          <div class="col-3 d-flex justify-content-center">
+            {% include "board/_like.html" %}
           </div>
         </div>
-        <div class="id_created_at d-flex flex-column">
-          {% if request.user.first_name == board.name %}
-            <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseExample">
-              {{ board.name }}
-            </a>
-            <div class="collapse" id="collapseDetail">
-              <div class="card card-body">
-                <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:update' board.pk %}">수정하기</a>
-                <a style="text-decoration: none; color: #0E2231;" href="" data-toggle="modal" data-target="#exampleModal2">삭제하기</a>
+        <div class="id_created_at d-flex justify-content-between mt-2">
+          <div>
+            {% if request.user.first_name == board.name %}
+              <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <img class="rounded-circle-username" src="{% static 'images/round_symbol.jpg' %}" alt="">
+                {{ board.name }}
+              </a>
+              <div class="collapse" id="collapseDetail">
+                <div class="card card-body">
+                  <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:update' board.pk %}">수정하기</a>
+                  <a style="text-decoration: none; color: #0E2231;" href="" data-toggle="modal" data-target="#exampleModal2">삭제하기</a>
+                </div>
               </div>
-            </div>
-          {% else %}
-            <div>{{ board.name }}</div>
-          {% endif %}
-
-          <div>{{ board.created_at | timesince }} 전</div>
-          <div>{{ board.hit }}</div>
+            {% else %}
+              <img class="rounded-circle-username" src="{% static 'images/round_symbol.jpg' %}" alt="">
+              {{ board.name }}
+            {% endif %}
+          </div>
+          <div>
+            {% load board_extras %}
+            {{ board.created_at | timesince | upto:',' }} 전 |
+            조회 : {{ board.hit }}
+          </div>
         </div>
       </div>
       <div class="card-body">
@@ -89,7 +95,7 @@
     {% endfor %}
   </div>
 
-  {% comment %} modal {% endcomment %}
+{#  modal #}
   <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -100,7 +106,7 @@
           </button>
         </div>
         <div class="modal-body">
-          정말 삭제하시겠습니꽈?
+          정말 삭제하시겠습니까?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">아니요</button>
@@ -115,8 +121,5 @@
 
 
   <div class='dummy'></div>
-
-</div>
-
 
 {% endblock content %}

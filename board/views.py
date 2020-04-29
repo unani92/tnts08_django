@@ -5,7 +5,7 @@ from .models import Board
 from .forms import BoardForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from datetime import datetime
 # Create your views here.
 @login_required
 def index(request) :
@@ -121,7 +121,9 @@ def CommentCreate(request,board_pk):
         comment = form.save(commit=False)
         comment.name = request.user
         comment.board = board
+        board.updated_at = datetime.now()
         comment.save()
+        board.save()
         return redirect('board:detail',board.pk)
 
 def search(request):

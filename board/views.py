@@ -68,6 +68,25 @@ def detail(request,pk) :
         'board':board,
         'commentform':commentform,
     }
+    response = render(request,'board/detail.html',context)
+
+    cookie_name = 'hit'
+
+    if request.COOKIES.get(cookie_name) :
+        cookies = request.COOKIES.get(cookie_name)
+        cookies_list = cookies.split('|')
+        if str(pk) not in cookies_list:
+            response.set_cookie(cookie_name,cookies+f'|{pk}',expires=7200)
+            board.hit += 1
+            board.save()
+            return response
+
+    else :
+        response.set_cookie(cookie_name,pk,expires=7200)
+        board.hit += 1
+        board.save()
+        return response
+
     return render(request,'board/detail.html',context)    
 
 @login_required

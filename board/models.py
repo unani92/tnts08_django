@@ -32,6 +32,7 @@ class Board(models.Model) :
         settings.AUTH_USER_MODEL,
         related_name='dislike_boards'
     )
+    hit = models.IntegerField(default=0)
 
 class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)

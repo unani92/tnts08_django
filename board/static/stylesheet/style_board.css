@@ -23,10 +23,16 @@ h2 {
 }
 td{
     font-family: 'Noto Sans KR', sans-serif;
+    font-size: small;
 }
-
+th{
+    font-size: smaller;
+}
 @media (max-width: 500px) {
     .profile{
         display: none;
     }
+}
+.comment{
+    color: red;
 }

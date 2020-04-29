@@ -23,6 +23,7 @@ h2 {
 }
 td{
     font-family: 'Noto Sans KR', sans-serif;
+    font-size: small;
 }
 
 @media (max-width: 500px) {

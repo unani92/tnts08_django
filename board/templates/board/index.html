@@ -88,7 +88,8 @@
               <td>{{notice.name}}</td>
               <td style='font-weight:bold;'>
                 <a class="text-dark text-decoration-none" href="{% url 'board:detail' notice.pk %}">
-                  <span>{{notice.title}}    ({{ notice.comment_set.count }})</span>
+                  <span style="margin-right: 5px;">{{notice.title}}</span>
+                  <span class="comment">{{ notice.comment_set.count }}</span>
                 </a>
               </td>
               <td>{{notice.created_at|timesince}} 전</td>
@@ -100,10 +101,12 @@
               <td>{{board.name}}</td>
               <td style='font-weight:bold;'>
                 <a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">
-                  <span>{{board.title}}    ({{ board.comment_set.count }})</span>
+                  <span style="margin-right: 5px;">{{board.title}}</span>
+                  <span class="comment">{{ board.comment_set.count }}</span>
                 </a>
               </td>
-              <td>{{ board.created_at | timesince }} 전</td>
+              {% load board_extras %}
+              <td>{{ board.created_at | timesince | upto:',' }} 전</td>
             </tr>
           {% endfor %}
         {% else %}
@@ -113,7 +116,10 @@
               <td>{{board.name}}</td>
               <td style='font-weight:bold;'>
                 <a class="text-dark text-decoration-none" href="{% url 'board:detail' board.pk %}">
-                  <span>{{board.title}}    ({{ board.comment_set.count }})</span>
+                  <span>{{board.title}}</span>
+                  <span class="comment">
+                    {{ board.comment_set.count }}
+                  </span>
                 </a>
               </td>
               <td>{{board.created_at|date:"y. n. j. G:i"}}</td>

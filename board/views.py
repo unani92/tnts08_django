@@ -69,8 +69,7 @@ def detail(request,pk) :
         'commentform':commentform,
     }
     response = render(request,'board/detail.html',context)
-
-    cookie_name = 'hit'
+    cookie_name = f'hit:{request.user.username}'
 
     if request.COOKIES.get(cookie_name) :
         cookies = request.COOKIES.get(cookie_name)

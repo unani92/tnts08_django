@@ -54,7 +54,7 @@ def create(request) :
             board.save()
             messages.success(request,'새 글이 등록되었습니다.')
 
-            return redirect('board:index')
+            return redirect('board:detail',board.pk)
     else : 
         form = BoardForm()
     context = {'form':form}

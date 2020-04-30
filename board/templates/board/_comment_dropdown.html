@@ -1,0 +1,15 @@
+{% if request.user.first_name == board.name %}
+  <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetailComment{{ comment.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
+    {{ comment.name }}
+  </a>
+  <div class="collapse" id="collapseDetailComment{{ comment.pk }}">
+    <div class="card card-body">
+      <a style="text-decoration: none; color: #0E2231;" href="#">수정하기</a>
+      <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:comment_delete' board.pk comment.pk %}">삭제하기</a>
+    </div>
+  </div>
+{% else %}
+  <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
+  {{ comment.name }}
+{% endif %}

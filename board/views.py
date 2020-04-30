@@ -122,9 +122,17 @@ def CommentCreate(request,board_pk):
         comment.name = request.user
         comment.board = board
         board.updated_at = datetime.now()
+
         comment.save()
         board.save()
         return redirect('board:detail',board.pk)
+
+@login_required
+def CommentDelete(request,board_pk,comment_pk):
+    board = get_object_or_404(Board,pk=board_pk)
+    comment = board.comment_set.get(pk=comment_pk)
+    comment.delete()
+    return redirect('board:detail',board_pk)
 
 def search(request):
     keyword = request.GET.get('keyword')
@@ -136,7 +144,7 @@ def search(request):
         boards = Board.objects.filter(content__contains=keyword)
 
     context = {'boards':boards}
-
+    datetime.now()
     return render(request,'board/index.html',context)
 
 def like(request,pk):

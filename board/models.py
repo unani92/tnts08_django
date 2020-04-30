@@ -34,9 +34,8 @@ class Board(models.Model) :
         related_name='dislike_boards'
     )
     hit = models.IntegerField(default=0)
-
     def is_updated(self):
-        return datetime.now().day - self.updated_at.day <= 1
+        return datetime.utcnow().hour - self.updated_at.hour <= 2
 
 class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)

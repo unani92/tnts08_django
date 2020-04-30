@@ -14,9 +14,13 @@ class BoardForm(forms.ModelForm) :
         ) 
     )
     choice = forms.ChoiceField(choices=c,label='')
+    hashtag = forms.CharField(
+        label=('해시태그'),
+        required=False
+    )
     class Meta : 
         model = Board
-        fields = ['choice','title','content']
+        fields = ['choice','title','content','hashtag']
 
 class CommentForm(forms.ModelForm) :
     content = forms.CharField(

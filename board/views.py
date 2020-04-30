@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Board
+from .models import Board, Hashtag
 from .forms import BoardForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
+from django.db.models import Q
+
 # Create your views here.
 @login_required
 def index(request) :
@@ -52,6 +54,13 @@ def create(request) :
             board = form.save()
             board.name=request.user.first_name
             board.save()
+
+            # hashtag
+            hashtag = Hashtag()
+            hashtag.content = board.hashtag
+            hashtag.save()
+            hashtag.board.add(board)
+
             messages.success(request,'새 글이 등록되었습니다.')
 
             return redirect('board:detail',board.pk)
@@ -64,13 +73,25 @@ def create(request) :
 def detail(request,pk) : 
     board = get_object_or_404(Board,pk=pk)
     commentform = CommentForm()
-    context = {
-        'board':board,
-        'commentform':commentform,
-    }
+
+    if board.hashtag_boards.all():
+        hashtag = board.hashtag_boards.all()[0]
+        hash_list = hashtag.content.split('#')
+        hash_list = hash_list[1:]
+        context = {
+            'board': board,
+            'hash_list': hash_list,
+            'commentform': commentform,
+        }
+    else :
+        context = {
+            'board':board,
+            'commentform':commentform,
+        }
     response = render(request,'board/detail.html',context)
     cookie_name = f'hit:{request.user.username}'
 
+    # Cookie
     if request.COOKIES.get(cookie_name) :
         cookies = request.COOKIES.get(cookie_name)
         cookies_list = cookies.split('|')
@@ -144,7 +165,7 @@ def search(request):
         boards = Board.objects.filter(content__contains=keyword)
 
     context = {'boards':boards}
-    datetime.now()
+
     return render(request,'board/index.html',context)
 
 def like(request,pk):
@@ -164,3 +185,9 @@ def dislike(request,pk):
         board.like_users.remove(request.user)
         board.dislike_users.add(request.user)
     return redirect('board:detail',board.pk)
+
+def search_tag(request):
+    term = request.GET.get('term')
+    boards = Board.objects.filter(Q(title__contains=term) | Q(content__contains=term))
+    context = {'boards':boards}
+    return render(request,'board/index.html',context)

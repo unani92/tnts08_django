@@ -59,6 +59,13 @@
         <div>
           {{board.content|safe}}
         </div>
+        <div>
+          {% for hash in hash_list %}
+            <a href="/board/search_tag?term={{ hash }}">
+              <span class="badge badge-pill badge-dark">{{ hash }}</span>
+            </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>

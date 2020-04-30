@@ -34,8 +34,17 @@ class Board(models.Model) :
         related_name='dislike_boards'
     )
     hit = models.IntegerField(default=0)
+    hashtag = models.CharField(max_length=100, null=True)
+
     def is_updated(self):
         return datetime.utcnow().hour - self.updated_at.hour <= 2
+
+class Hashtag(models.Model):
+    board = models.ManyToManyField(
+        Board,
+        related_name='hashtag_boards'
+    )
+    content = models.CharField(max_length=100)
 
 class Comment(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)

@@ -13,5 +13,6 @@ urlpatterns = [
     path('<int:board_pk>/comment/', views.CommentCreate, name='comment_create'),
     path('<int:board_pk>/<int:comment_pk>/delete', views.CommentDelete, name='comment_delete'),
     path('<int:pk>/like', views.like, name='like'),
-    path('<int:pk>/dislike', views.dislike, name='dislike')
+    path('<int:pk>/dislike', views.dislike, name='dislike'),
+    path('search_tag/', views.search_tag, name='search_tag'),
 ]

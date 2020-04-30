@@ -116,6 +116,12 @@ def update(request,pk) :
         form = BoardForm(request.POST,instance=board)
         if form.is_valid(): 
             board = form.save()
+
+            # hashtag
+            hashtag = board.hashtag_boards.all()[0]
+            hashtag.content = board.hashtag
+            hashtag.save()
+
             messages.success(request,'게시글이 수정되었습니다.')
             return redirect('board:index')
 

@@ -23,7 +23,7 @@
           <div class="col-9 px-0 d-flex align-items-center">
             <h5 class="board_title mb-0 mx-3">{{ board.title }}</h5>
           </div>
-          <div class="col-3 d-flex justify-content-center">
+          <div class="col-3 d-flex justify-content-end">
             {% include "board/_like.html" %}
           </div>
         </div>
@@ -48,7 +48,7 @@
           <div>
             {% load board_extras %}
             {{ board.created_at | timesince | upto:',' }} 전 |
-            조회 : {{ board.hit }}
+            조회 : {{ board.hit_set.all.0.count }}
           </div>
         </div>
       </div>

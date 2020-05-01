@@ -12,6 +12,6 @@
     <td>{{board.name}}</td>
       {% load board_extras %}
     <td>{{ board.created_at | timesince | upto:',' }} 전</td>
-    <td>{{ board.hit }}</td>
+    <td>{{ board.hit_set.all.0.count }}</td>
   </tr>
 {% endfor %}

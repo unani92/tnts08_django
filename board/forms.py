@@ -1,5 +1,5 @@
 from django import forms
-from .models import Board, Comment
+from .models import Board, Comment, Reply
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 c = [('일반','일반'),('공지','공지')]
@@ -35,3 +35,18 @@ class CommentForm(forms.ModelForm) :
     class Meta:
         model = Comment
         fields = ['content']
+
+class ReplyForm(forms.ModelForm) :
+    content = forms.CharField(
+        label=(''),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': '댓글은 200자까지 작성 가능합니다.',
+                'style' : 'height:100px;'
+            }
+        )
+    )
+    class Meta:
+        model = Reply
+        fields = ['content']
+

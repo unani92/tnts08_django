@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Board, Hashtag
+from .models import Board, Hashtag, Hit
 from .forms import BoardForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -52,6 +52,9 @@ def create(request) :
         form = BoardForm(request.POST)
         if form.is_valid():
             board = form.save()
+            hit = Hit()
+            hit.board = board
+            hit.save()
             board.name=request.user.first_name
             board.save()
 
@@ -97,14 +100,16 @@ def detail(request,pk) :
         cookies_list = cookies.split('|')
         if str(pk) not in cookies_list:
             response.set_cookie(cookie_name,cookies+f'|{pk}',expires=7200)
-            board.hit += 1
-            board.save()
+            hit = board.hit_set.all()[0]
+            hit.count += 1
+            hit.save()
             return response
 
     else :
         response.set_cookie(cookie_name,pk,expires=7200)
-        board.hit += 1
-        board.save()
+        hit = board.hit_set.all()[0]
+        hit.count += 1
+        hit.save()
         return response
 
     return render(request,'board/detail.html',context)    

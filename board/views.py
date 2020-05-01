@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Board, Hashtag, Hit
-from .forms import BoardForm, CommentForm
+from .forms import BoardForm, CommentForm, ReplyForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
@@ -76,6 +76,7 @@ def create(request) :
 def detail(request,pk) : 
     board = get_object_or_404(Board,pk=pk)
     commentform = CommentForm()
+    replyform = ReplyForm()
 
     if board.hashtag_boards.all():
         hashtag = board.hashtag_boards.all()[0]
@@ -85,11 +86,13 @@ def detail(request,pk) :
             'board': board,
             'hash_list': hash_list,
             'commentform': commentform,
+            'replyform':replyform,
         }
     else :
         context = {
             'board':board,
             'commentform':commentform,
+            'replyform':replyform,
         }
     response = render(request,'board/detail.html',context)
     cookie_name = f'hit:{request.user.username}'
@@ -202,3 +205,18 @@ def search_tag(request):
     boards = Board.objects.filter(Q(title__contains=term) | Q(content__contains=term))
     context = {'boards':boards}
     return render(request,'board/index.html',context)
+
+def ReplyCreate(request,board_pk,comment_pk):
+    board = get_object_or_404(Board,pk=board_pk)
+    comment = board.comment_set.get(pk=comment_pk)
+    if request.method == 'POST':
+        reply_form = ReplyForm(request.POST)
+        if reply_form.is_valid():
+            reply = reply_form.save(commit=False)
+            reply.name = request.user
+            reply.comment = comment
+            board.updated_at = datetime.now()
+
+            reply.save()
+            board.save()
+            return redirect('board:detail', board.pk)

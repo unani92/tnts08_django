@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Board, Hashtag, Hit, Reply
+from .models import Board, Hashtag, Hit, Reply, Comment
 from .forms import BoardForm, CommentForm, ReplyForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -229,3 +229,21 @@ def ReplyDelete(request,board_pk,reply_pk):
 
     else :
         return redirect('board:detail',board_pk)
+
+def CommentLike(request,board_pk,comment_pk):
+    comment = get_object_or_404(Comment,pk=comment_pk)
+    if request.user not in comment.like_users.all() and request.user not in comment.dislike_users.all():
+        comment.like_users.add(request.user)
+    else :
+        comment.dislike_users.remove(request.user)
+        comment.like_users.add(request.user)
+    return redirect('board:detail', board_pk)
+
+def CommentDislike(request,board_pk,comment_pk):
+    comment = get_object_or_404(Comment,pk=comment_pk)
+    if request.user not in comment.like_users.all() and request.user not in comment.dislike_users.all():
+        comment.dislike_users.add(request.user)
+    else :
+        comment.like_users.remove(request.user)
+        comment.dislike_users.add(request.user)
+    return redirect('board:detail',board_pk)

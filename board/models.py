@@ -56,6 +56,16 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
     content = models.TextField(max_length=200)
+
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='like_comments'
+    )
+    dislike_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='dislike_comments'
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,6 +1,6 @@
 {% if request.user.first_name == comment.name.first_name %}
   <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetailComment{{ comment.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample">
-    <span class="mx-3">{{ comment.name.first_name }}</span>
+    <span>{{ comment.name.first_name }}</span>
   </a>
   <div style="width: 130px;" class="collapse" id="collapseDetailComment{{ comment.pk }}">
     <div class="card card-body">
@@ -9,5 +9,5 @@
     </div>
   </div>
 {% else %}
-  <span class="mx-3">{{ comment.name.first_name }}</span>
+  <span>{{ comment.name.first_name }}</span>
 {% endif %}

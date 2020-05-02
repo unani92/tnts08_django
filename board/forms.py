@@ -41,7 +41,7 @@ class ReplyForm(forms.ModelForm) :
         label=(''),
         widget=forms.Textarea(
             attrs={
-                'placeholder': '댓글은 200자까지 작성 가능합니다.',
+                'placeholder': '답글은 200자까지 작성 가능합니다.',
                 'style' : 'height:100px;'
             }
         )

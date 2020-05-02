@@ -5,7 +5,7 @@
   <form action="{% url 'board:comment_create' board.pk %}" method="post">
     <div class="d-flex justify-content-between">
       <h3>댓글 : {{ board.comment_set.count }}</h3>
-      <button class="btn btn-secondary" type="submit">작성</button>
+      <button class="btn btn-secondary submit-btn" type="submit">작성</button>
     </div>
     {% csrf_token %}
     {% bootstrap_form commentform %}
@@ -16,21 +16,23 @@
     <div class="media d-flex">
       <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
       <div class="media-body">
-        <div class="d-flex justify-content-between">
+        <div class="px-3 d-flex justify-content-between">
           <h5 class="mt-0">{% include 'board/_comment_dropdown.html' %}</h5>
           <div>
             <span>{{ comment.created_at | timesince }}</span>
           </div>
         </div>
         <div class="px-3">
-          <p>{{ comment.content | linebreaksbr }}</p>
-          <div>
+          <div><p>{{ comment.content | linebreaksbr }}</p></div>
+          <div class="d-flex justify-content-between">
             {# reply collapse #}
             <button class="btn btn-dark reply-btn" type="button" data-toggle="collapse" data-target="#collapseReply{{ comment.pk }}" aria-expanded="false" aria-controls="collapseReply">
               답글 <span class="badge badge-light">{{ comment.reply_set.count }}</span>
             </button>
-            <hr>
+            {% include 'board/_comment_like.html' %}
+
           </div>
+          <hr>
         </div>
       </div>
     </div>
@@ -59,7 +61,7 @@
         <form action="{% url 'board:reply_create' board.pk comment.pk %}" method="post">
           {% csrf_token %}
           {% bootstrap_form replyform %}
-          <button type="submit">reply</button>
+          <button class="btn btn-secondary submit-btn" type="submit">reply</button>
         </form>
       </div>
     </div>

@@ -1,0 +1,44 @@
+{% if request.user not in comment.like_users.all %}
+  {% if request.user not in comment.dislike_users.all %}
+    <div class="d-flex">
+      <div class="mx-3">
+        <a href="{% url 'board:comment_like' board.pk comment.pk %}">
+          <i style="color: #3D3D3D" class="fas fa-thumbs-up"></i>
+        </a>
+        {{ comment.like_users.all.count }}
+      </div>
+      <div>
+        <a href="{% url 'board:comment_dislike' board.pk comment.pk %}">
+          <i style="color: #3D3D3D" class="fas fa-thumbs-down"></i>
+        </a>
+        {{ comment.dislike_users.all.count }}
+      </div>
+    </div>
+  {% else %}
+    <div class="d-flex">
+      <div class="mx-3">
+        <a href="{% url 'board:comment_like' board.pk comment.pk %}">
+          <i style="color: #3D3D3D" class="fas fa-thumbs-up"></i>
+        </a>
+        {{ comment.like_users.all.count }}
+      </div>
+      <div>
+        <i style="color: #3D3D3D" class="fas fa-thumbs-down"></i>
+        {{ comment.dislike_users.all.count }}
+      </div>
+    </div>
+  {% endif %}
+{% else %}
+  <div class="d-flex">
+    <div class="mx-3">
+      <i style="color: #3D3D3D" class="fas fa-thumbs-up"></i>
+      {{ comment.like_users.all.count }}
+    </div>
+    <div>
+      <a href="{% url 'board:comment_dislike' board.pk comment.pk %}">
+        <i style="color: #3D3D3D" class="fas fa-thumbs-down"></i>
+      </a>
+      {{ comment.dislike_users.all.count }}
+    </div>
+  </div>
+{% endif %}

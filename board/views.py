@@ -6,7 +6,7 @@ from .forms import BoardForm, CommentForm, ReplyForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
-from django.db.models import Q
+from django.db.models import Q, Count
 
 # Create your views here.
 @login_required
@@ -75,6 +75,7 @@ def create(request) :
 @login_required
 def detail(request,pk) : 
     board = get_object_or_404(Board,pk=pk)
+    comments = board.comment_set.all()
     commentform = CommentForm()
     replyform = ReplyForm()
 
@@ -84,6 +85,7 @@ def detail(request,pk) :
         hash_list = hash_list[1:]
         context = {
             'board': board,
+            'comments':comments,
             'hash_list': hash_list,
             'commentform': commentform,
             'replyform':replyform,
@@ -91,6 +93,7 @@ def detail(request,pk) :
     else :
         context = {
             'board':board,
+            'comments': comments,
             'commentform':commentform,
             'replyform':replyform,
         }
@@ -116,6 +119,28 @@ def detail(request,pk) :
         return response
 
     return render(request,'board/detail.html',context)    
+
+def CommentSort(request,pk):
+    board = get_object_or_404(Board,pk=pk)
+    commentform = CommentForm()
+    replyform = ReplyForm()
+    term = request.GET.get('term')
+    print(term)
+    if term == 'time':
+        comments = board.comment_set.order_by('-created_at')
+    elif term == 'likes':
+        comments = board.comment_set.annotate(count=Count('like_users')).order_by('-count')
+    else :
+        comments = board.comment_set.annotate(count=Count('reply')).order_by('-count')
+    context = {
+        'board':board,
+        'commentform':commentform,
+        'replyform':commentform,
+        'comments':comments,
+    }
+
+    return render(request,'board/detail.html',context)
+
 
 @login_required
 def update(request,pk) : 
@@ -160,7 +185,7 @@ def CommentCreate(request,board_pk):
 
         comment.save()
         board.save()
-        return redirect('board:detail',board.pk)
+        return redirect('/board/' + str(board_pk) + '#bottom')
 
 @login_required
 def CommentDelete(request,board_pk,comment_pk):
@@ -219,7 +244,7 @@ def ReplyCreate(request,board_pk,comment_pk):
 
             reply.save()
             board.save()
-            return redirect('board:detail', board.pk)
+            return redirect('/board/' + str(board_pk) + f'#comment_like{comment_pk}')
 
 def ReplyDelete(request,board_pk,reply_pk):
     reply = get_object_or_404(Reply,pk=reply_pk)
@@ -237,7 +262,7 @@ def CommentLike(request,board_pk,comment_pk):
     else :
         comment.dislike_users.remove(request.user)
         comment.like_users.add(request.user)
-    return redirect('/board/' + str(board_pk) + '#comment_like')
+    return redirect('/board/' + str(board_pk) + f'#comment_like{comment_pk}')
 
 def CommentDislike(request,board_pk,comment_pk):
     comment = get_object_or_404(Comment,pk=comment_pk)
@@ -246,4 +271,4 @@ def CommentDislike(request,board_pk,comment_pk):
     else :
         comment.like_users.remove(request.user)
         comment.dislike_users.add(request.user)
-    return redirect('/board/' + str(board_pk) + '#comment_like')
+    return redirect('/board/' + str(board_pk) + f'#comment_like{comment_pk}')

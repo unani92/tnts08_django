@@ -70,7 +70,10 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+    )
     name = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE

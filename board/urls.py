@@ -19,4 +19,5 @@ urlpatterns = [
     path('search_tag/', views.search_tag, name='search_tag'),
     path('<int:board_pk>/<int:comment_pk>/CommentLike/', views.CommentLike, name='comment_like'),
     path('<int:board_pk>/<int:comment_pk>/CommentDisike/', views.CommentDislike, name='comment_dislike'),
+    path('<int:pk>/CommentSort/', views.CommentSort,name='CommentSort'),
 ]

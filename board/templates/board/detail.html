@@ -27,11 +27,11 @@
             {% include "board/_like.html" %}
           </div>
         </div>
-        <div class="id_created_at d-flex justify-content-between mt-2">
+        <div class="id_created_at d-flex justify-content-between align-items-center mt-2">
           <div>
             {% if request.user.first_name == board.name %}
               <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <img class="rounded-circle-username" src="{% static 'images/round_symbol.jpg' %}" alt="">
+                <img class="rounded-circle rounded-circle-username" src="{% static 'images/round_symbol.jpg' %}" alt="">
                 {{ board.name }}
               </a>
               <div class="collapse" id="collapseDetail">
@@ -98,6 +98,6 @@
   </div>
 
 
-  <div class='dummy'></div>
+  <div id="bottom" class='dummy'></div>
 
 {% endblock content %}

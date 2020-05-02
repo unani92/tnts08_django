@@ -2,9 +2,8 @@
 <div class="container my-3">
 
   {#  comment form #}
-  <form action="{% url 'board:comment_create' board.pk %}" method="post">
+  <form id="comment" action="{% url 'board:comment_create' board.pk %}" method="post">
     <div class="d-flex justify-content-between">
-      <h3>댓글 : {{ board.comment_set.count }}</h3>
       <button class="btn btn-secondary submit-btn" type="submit">작성</button>
     </div>
     {% csrf_token %}
@@ -12,60 +11,70 @@
   </form>
 
   {# comment set all #}
-  {% for comment in board.comment_set.all %}
-    <div id="comment_like" class="media d-flex">
-      <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
-      <div class="media-body">
-        <div class="px-3 d-flex justify-content-between">
-          <h5 class="mt-0">{% include 'board/_comment_dropdown.html' %}</h5>
-          <div>
-            <span>{{ comment.created_at | timesince }}</span>
-          </div>
-        </div>
-        <div class="px-3">
-          <div><p>{{ comment.content | linebreaksbr }}</p></div>
-          <div class="d-flex justify-content-between">
-            {# reply collapse #}
-            <button class="btn btn-dark reply-btn" type="button" data-toggle="collapse" data-target="#collapseReply{{ comment.pk }}" aria-expanded="false" aria-controls="collapseReply">
-              답글 <span class="badge badge-light">{{ comment.reply_set.count }}</span>
-            </button>
-            {% include 'board/_comment_like.html' %}
-
-          </div>
-          <hr>
-        </div>
+  <div>
+    <div class="d-flex justify-content-between my-3">
+      <h3>댓글 : {{ board.comment_set.count }}</h3>
+      <div>
+        <a class="badge badge-secondary" href="/board/{{ board.pk }}/CommentSort?term=time#comment">시간순</a>
+        <a class="badge badge-secondary" href="/board/{{ board.pk }}/CommentSort?term=likes#comment">추천순</a>
+        <a class="badge badge-secondary" href="/board/{{ board.pk }}/CommentSort?term=replys#comment">답글순</a>
       </div>
     </div>
-
-    {# reply collapse #}
-    <div class="collapse" id="collapseReply{{ comment.pk }}">
-      <div class="card card-body">
-        {% for reply in comment.reply_set.all %}
-          <div class="media d-flex">
-            <img class="rounded-circle-username" src="{{ reply.name.profile.url }}" alt="">
-            <div class="media-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="mt-0">{% include 'board/_reply_dropdown.html' %}</h5>
-                <div>
-                  <span>{{ reply.created_at | timesince }}</span>
-                </div>
-              </div>
-              <div class="px-3">
-                <p>{{ reply.content | linebreaksbr }}</p>
-              </div>
+    {% for comment in comments %}
+      <div id="comment_like{{ comment.pk }}" class="media d-flex">
+        <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
+        <div class="media-body">
+          <div class="px-3 d-flex justify-content-between">
+            <h5 class="mt-0">{% include 'board/_comment_dropdown.html' %}</h5>
+            <div>
+              <span>{{ comment.created_at | timesince }}</span>
             </div>
           </div>
-        {% endfor %}
+          <div class="px-3">
+            <div><p>{{ comment.content | linebreaksbr }}</p></div>
+            <div class="d-flex justify-content-between">
+              {# reply collapse #}
+              <button class="btn btn-dark reply-btn" type="button" data-toggle="collapse" data-target="#collapseReply{{ comment.pk }}" aria-expanded="false" aria-controls="collapseReply">
+                답글 <span class="badge badge-light">{{ comment.reply_set.count }}</span>
+              </button>
+              {% include 'board/_comment_like.html' %}
 
-        {# reply form #}
-        <form action="{% url 'board:reply_create' board.pk comment.pk %}" method="post">
-          {% csrf_token %}
-          {% bootstrap_form replyform %}
-          <button class="btn btn-secondary submit-btn" type="submit">reply</button>
-        </form>
+            </div>
+            <hr>
+          </div>
+        </div>
       </div>
-    </div>
-  {% empty %}
-    <span>댓글이 없습니다. 첫 댓의 주인공이 되어주세요</span>
-  {% endfor %}
+
+      {# reply collapse #}
+      <div class="collapse" id="collapseReply{{ comment.pk }}">
+        <div class="card card-body">
+          {% for reply in comment.reply_set.all %}
+            <div class="media d-flex">
+              <img class="rounded-circle-username" src="{{ reply.name.profile.url }}" alt="">
+              <div class="media-body">
+                <div class="d-flex justify-content-between">
+                  <h5 class="mt-0">{% include 'board/_reply_dropdown.html' %}</h5>
+                  <div>
+                    <span>{{ reply.created_at | timesince }}</span>
+                  </div>
+                </div>
+                <div class="px-3">
+                  <p>{{ reply.content | linebreaksbr }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          {# reply form #}
+          <form action="{% url 'board:reply_create' board.pk comment.pk %}" method="post">
+            {% csrf_token %}
+            {% bootstrap_form replyform %}
+            <button class="btn btn-secondary submit-btn" type="submit">reply</button>
+          </form>
+        </div>
+      </div>
+    {% empty %}
+      <span>댓글이 없습니다. 첫 댓의 주인공이 되어주세요</span>
+    {% endfor %}
+  </div>
 </div>

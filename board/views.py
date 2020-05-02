@@ -237,7 +237,7 @@ def CommentLike(request,board_pk,comment_pk):
     else :
         comment.dislike_users.remove(request.user)
         comment.like_users.add(request.user)
-    return redirect('board:detail', board_pk)
+    return redirect('/board/' + str(board_pk) + '#comment_like')
 
 def CommentDislike(request,board_pk,comment_pk):
     comment = get_object_or_404(Comment,pk=comment_pk)
@@ -246,4 +246,4 @@ def CommentDislike(request,board_pk,comment_pk):
     else :
         comment.like_users.remove(request.user)
         comment.dislike_users.add(request.user)
-    return redirect('board:detail',board_pk)
+    return redirect('/board/' + str(board_pk) + '#comment_like')

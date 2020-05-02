@@ -13,7 +13,7 @@
 
   {# comment set all #}
   {% for comment in board.comment_set.all %}
-    <div class="media d-flex">
+    <div id="comment_like" class="media d-flex">
       <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
       <div class="media-body">
         <div class="px-3 d-flex justify-content-between">

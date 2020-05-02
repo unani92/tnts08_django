@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Board, Hashtag, Hit
+from .models import Board, Hashtag, Hit, Reply
 from .forms import BoardForm, CommentForm, ReplyForm
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -220,3 +220,12 @@ def ReplyCreate(request,board_pk,comment_pk):
             reply.save()
             board.save()
             return redirect('board:detail', board.pk)
+
+def ReplyDelete(request,board_pk,reply_pk):
+    reply = get_object_or_404(Reply,pk=reply_pk)
+    if request.user == reply.name:
+        reply.delete()
+        return redirect('board:detail',board_pk)
+
+    else :
+        return redirect('board:detail',board_pk)

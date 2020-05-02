@@ -36,7 +36,7 @@ class Board(models.Model) :
     hashtag = models.CharField(max_length=100, null=True)
 
     def is_updated(self):
-        return datetime.utcnow().hour - self.updated_at.hour <= 2
+        return 0 <= datetime.utcnow().day - self.updated_at.day < 1
 
 class Hit(models.Model):
     board = models.ForeignKey(Board,on_delete=models.CASCADE)

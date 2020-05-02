@@ -1,0 +1,13 @@
+{% if request.user.first_name == reply.name.first_name %}
+  <a style="text-decoration: none; color: #0E2231; font-weight: bolder" data-toggle="collapse" href="#collapseDetailReply{{ reply.pk }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <span class="mx-3">{{ reply.name.first_name }}</span>
+  </a>
+  <div style="width: 130px;" class="collapse" id="collapseDetailReply{{ reply.pk }}">
+    <div class="card card-body">
+      <a style="text-decoration: none; color: #0E2231;" href="#">수정하기</a>
+      <a style="text-decoration: none; color: #0E2231;" href="{% url 'board:reply_delete' board.pk reply.pk %}">삭제하기</a>
+    </div>
+  </div>
+{% else %}
+  <span class="mx-3">{{ reply.name.first_name }}</span>
+{% endif %}

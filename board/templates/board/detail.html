@@ -70,47 +70,10 @@
     </div>
   </div>
 
-  <div class="container my-3">
+  {# comment & reply #}
+  {% include 'board/_comment_all.html' %}
 
-    {#  comment form #}
-
-    <form action="{% url 'board:comment_create' board.pk %}" method="post">
-      <div class="d-flex justify-content-between">
-        <h3>댓글 : {{ board.comment_set.count }}</h3>
-        <button class="btn btn-secondary" type="submit">작성</button>
-      </div>
-      {% csrf_token %}
-      {% bootstrap_form commentform %}
-    </form>
-
-
-    {% for comment in board.comment_set.all %}
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            {% include 'board/_comment_dropdown.html' %}
-          </div>
-          <h5 class="pb-0 mb-0">{{ comment.created_at | timesince }} 전</h5>
-        </div>
-        <div class="card-body">
-          <p>{{ comment.content | linebreaksbr }}</p>
-        </div>
-      </div>
-      {#   대댓글   #}
-      {% for reply in comment.reply_set.all %}
-        {{ reply.content }}
-      {% endfor %}
-      <form action="{% url 'board:reply_create' board.pk comment.pk %}" method="post">
-        {% csrf_token %}
-        {% bootstrap_form replyform %}
-        <button type="submit">reply</button>
-      </form>
-    {% empty %}
-      <span>댓글이 없습니다. 첫 댓의 주인공이 되어주세요</span>
-    {% endfor %}
-  </div>
-
-{#  modal #}
+{#  board article modal: edit & delete #}
   <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

@@ -12,6 +12,7 @@ urlpatterns = [
     path('search/',views.search, name='search'),
     path('<int:board_pk>/comment/', views.CommentCreate, name='comment_create'),
     path('<int:board_pk>/<int:comment_pk>/comment/', views.ReplyCreate, name='reply_create'),
+    path('<int:board_pk>/<int:reply_pk>/reply/delete/', views.ReplyDelete, name='reply_delete'),
     path('<int:board_pk>/<int:comment_pk>/delete/', views.CommentDelete, name='comment_delete'),
     path('<int:pk>/like', views.like, name='like'),
     path('<int:pk>/dislike', views.dislike, name='dislike'),

@@ -25,7 +25,11 @@
         <button type="submit">submit</button>
       </form>
       <div>
-        첨전인원 : {{ match.join_match.all.count }}
+        <p>참전인원 : {{ match.join_match.all.count }}</p>
+        {% for person in match.join_match.all %}
+          <p>{{ person.user.first_name }} | {{ person.time }}</p>
+        {% endfor %}
+
       </div>
     </div>
     <div>

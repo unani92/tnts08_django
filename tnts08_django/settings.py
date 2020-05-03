@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'calender',
     'home',
     'board',
     'accounts',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'bootstrap4',
     'crispy_forms',
-
+    'tempus_dominus',
 ]
 
 

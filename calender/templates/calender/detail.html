@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block accounts %}
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+{# Include Bootstrap 4 and jQuery #}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+{# Django Tempus Dominus assets are included in `{{ form.media }}` #}
+{{ joinform.media }}
+{% endblock %}
+
+{% block content %}
+  <div class="dummy"></div>
+  {{ match.date }}
+  {{ match.home_away }}
+  {{ match.league_acl_fa }}
+  {{ match.vs }}
+  {{ match.d_day }}
+  <div class="container d-flex justify-content-between">
+    <div>
+      <form action="{% url 'calender:joinmatch' match.pk %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form joinform %}
+        <button type="submit">submit</button>
+      </form>
+      <div>
+        첨전인원 : {{ match.join_match.all.count }}
+      </div>
+    </div>
+    <div>
+      <a href="{% url 'calender:dismiss' match.pk %}">불참</a>
+      <p>불참인원 : {{ match.dismiss_match.all.count }}</p>
+    </div>
+
+
+  </div>
+
+{% endblock %}

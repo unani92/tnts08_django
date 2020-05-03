@@ -5,4 +5,5 @@ urlpatterns = [
     path('create/',views.create,name='create'),
     path('<int:pk>/', views.detail,name='detail'),
     path('<int:pk>/joinmatch/',views.joinmatch,name='joinmatch'),
+    path('<int:pk>/dismiss/',views.dismiss,name='dismiss'),
 ]

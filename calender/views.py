@@ -44,6 +44,7 @@ def joinmatch(request,pk):
         if match.dismiss_match.filter(user=request.user):
             dismiss = match.dismiss_match.get(user=request.user)
             match.dismiss_match.remove(dismiss)
+            dismiss.delete()
 
         match.join_match.add(join)
         return response
@@ -61,6 +62,7 @@ def dismiss(request,pk):
         if match.join_match.filter(user=request.user):
             join = match.join_match.get(user=request.user)
             match.join_match.remove(join)
+            join.delete()
 
         match.dismiss_match.add(dismiss)
         return response

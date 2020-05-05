@@ -1,6 +1,6 @@
 from django import forms
 from .models import JoinMatch, Join, Dismiss
-from tempus_dominus.widgets import DatePicker, TimePicker
+from tempus_dominus.widgets import DateTimePicker, DatePicker, TimePicker
 
 choice1 = [('home','home'),('away','away')]
 choice2 = [('League','League'),('ACL','ACL'),('FA','FA')]
@@ -15,7 +15,7 @@ class JoinMatchForm(forms.ModelForm):
         label='경기 종류'
     )
     date = forms.DateTimeField(
-        widget= DatePicker(
+        widget= DateTimePicker(
             options={
                 'minDate': '2020-01-01',
             }
@@ -28,7 +28,6 @@ class JoinMatchForm(forms.ModelForm):
         widget={
 
         }
-
     )
     vs = forms.CharField(
         label='팀명',
@@ -44,7 +43,7 @@ class JoinMatchForm(forms.ModelForm):
     )
     class Meta:
         model = JoinMatch
-        fields = ['highlight','home_away','league_acl_fa','vs','date']
+        fields = ['highlight','home_away','league_acl_fa','vs','date','content']
 
 class JoinForm(forms.ModelForm):
     time = forms.TimeField(

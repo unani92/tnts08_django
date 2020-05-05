@@ -11,17 +11,26 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+from django.core.exceptions import ImproperlyConfigured
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+with open('secret.json','r') as f :
+    secret = json.loads(f.read())
+def get_secret(setting,secret=secret):
+    try:
+        return secret[setting]
+    except:
+        msg = "Set key '{0}' in secret.json".format(setting)
+        raise ImproperlyConfigured
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','n%t%t40+le(ip9$b4lhk55(gjf$^vity(fb5n2q*a_=x-+dz9p')
+SECRET_KEY = get_secret('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True

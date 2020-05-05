@@ -24,6 +24,9 @@ class JoinMatch(models.Model):
     vs = models.CharField(max_length=20)
     highlight = models.BooleanField()
     date = models.DateTimeField()
+
+    content = models.TextField(default='')
+
     join_match = models.ManyToManyField(
         Join,
         related_name='join_matches'

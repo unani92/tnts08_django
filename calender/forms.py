@@ -22,22 +22,40 @@ class JoinMatchForm(forms.ModelForm):
         ),
         initial='2013-01-01',
     )
-    highlight = forms.BooleanField(required=False)
+    highlight = forms.BooleanField(
+        required=False,
+        label='총동원령',
+        widget={
 
+        }
+
+    )
+    vs = forms.CharField(
+        label='팀명',
+
+    )
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'style': 'height:300px;'
+            }
+        )
+    )
     class Meta:
         model = JoinMatch
-        fields = ['home_away','league_acl_fa','vs','highlight','date']
+        fields = ['highlight','home_away','league_acl_fa','vs','date']
 
 class JoinForm(forms.ModelForm):
     time = forms.TimeField(
         widget=TimePicker(
             options={
                 'enabledHours': list(range(0,24)),
-                'defaultDate': '1970-01-01T14:56:00'
             },
             attrs={
                 'input_toggle': True,
                 'input_group': True,
+                'style' : 'width: 150px;'
             },
         ),
     )

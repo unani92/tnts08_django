@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-
+{% load static %}
 {% block accounts %}
+<link rel="stylesheet" href="{% static 'stylesheet/calender_style.css' %}">
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
 {# Include Bootstrap 4 and jQuery #}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -11,33 +12,83 @@
 {% endblock %}
 
 {% block content %}
-  <div class="dummy"></div>
-  {{ match.date }}
-  {{ match.home_away }}
-  {{ match.league_acl_fa }}
-  {{ match.vs }}
-  {{ match.d_day }}
-  <div class="container d-flex justify-content-between">
-    <div>
-      <form action="{% url 'calender:joinmatch' match.pk %}" method="post">
-        {% csrf_token %}
-        {% bootstrap_form joinform %}
-        <button type="submit">submit</button>
-      </form>
-      <div>
-        <p>참전인원 : {{ match.join_match.all.count }}</p>
-        {% for person in match.join_match.all %}
-          <p>{{ person.user.first_name }} | {{ person.time }}</p>
-        {% endfor %}
-
-      </div>
-    </div>
-    <div>
-      <a href="{% url 'calender:dismiss' match.pk %}">불참</a>
-      <p>불참인원 : {{ match.dismiss_match.all.count }}</p>
-    </div>
-
+  <div class="dummy">
 
   </div>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center my-3">
+          <div class="d-flex align-items-center">
+            <h3 class="mb-0">
+            <span class="badge badge-danger">
+            D - {{ match.d_day }}
+            </span>
+            </h3>
+            <h3 class="mb-0 mx-3">
+            <span>
+              {{ match.date | date:'ymd' }} vs {{ match.vs }}
+            </span>
+            </h3>
+          </div>
+          <span>조회 : 0</span>
+        </div>
+        <div>
+          <span class="badge badge-pill badge-secondary">{{ match.home_away }}</span>
+           |
+          <span class="badge badge-pill badge-secondary">{{ match.league_acl_fa }}</span>
+           |
+          <span class="badge badge-pill badge-secondary">{{ match.date | date:'G:i' }}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>{{ match.content | linebreaksbr }}</p>
+        <div>
+          <a class="badge badge-dark" data-toggle="collapse" href="#collapseJoin" role="button" aria-expanded="false" aria-controls="collapseExample">
+            참전인원 : {{ match.join_match.all.count }}
+          </a>
+          <div class="collapse" id="collapseJoin">
+            <div class="card card-body">
+              <div class="row">
+                {% for person in match.join_match.all %}
+                  <div class="col-3 d-flex flex-column align-items-center">
+                    <img class="rounded-circle" style="height: 50px;width: 50px" src="{{ person.user.profile.url }}" alt="">
+                    <p>{{ person.user.first_name }}</p>
+                  </div>
+                {% empty %}
+                  <p>아직 참전인이 없습니다.</p>
+                {% endfor %}
+              </div>
 
+              <div>
+                <form class="d-flex align-items-end" action="{% url 'calender:joinmatch' match.pk %}" method="post">
+                  {% csrf_token %}
+                  {% bootstrap_form joinform %}
+                  <button class="btn btn-secondary join_btn" type="submit">참전하기</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <a class="badge badge-dark" data-toggle="collapse" href="#collapseDismiss" role="button" aria-expanded="false" aria-controls="collapseExample">
+            불참인원 : {{ match.dismiss_match.all.count }}
+          </a>
+          <div class="collapse" id="collapseDismiss">
+            <div class="card card-body">
+              <div class="row">
+                {% for person in match.dismiss_match.all %}
+                  <div class="col-3 d-flex flex-column align-items-center">
+                    <img class="rounded-circle" style="height: 50px;width: 50px" src="{{ person.user.profile.url }}" alt="">
+                    <p>{{ person.user.first_name }}</p>
+                  </div>
+                {% empty %}
+                  <p>아직 불참인원이 없습니다.</p>
+                {% endfor %}
+              </div>
+              <a class="btn btn-secondary" href="{% url 'calender:dismiss' match.pk %}">불참</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,43 @@
+.title {
+    height: 50px;
+}
+h2 {
+    font-family: 'Titillium Web', sans-serif;
+}
+.round_symbol {
+    width: 50px;
+    height: auto;
+}
+.bottom {
+    height: 50px;
+}
+.user a{
+    text-decoration: none;
+    font-weight: bold;
+}
+.board_dummy{
+    height: 50px;
+}
+.board_title {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+td{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: smaller;
+}
+th{
+    font-size: smaller;
+}
+@media (max-width: 500px) {
+    .profile{
+        display: none;
+    }
+}
+.comment{
+    color: red;
+}
+.rounded-circle-username{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+}

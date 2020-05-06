@@ -8,9 +8,22 @@
 {% block content %}
   <div class="dummy"></div>
   <div class="container">
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center mb-4">
       <img class="round_symbol mr-4" src="{% static 'images/round_symbol.jpg' %}" alt="">
       <h2 class="mb-0">Join Match</h2>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="width: 20%;">D-day</th>
+          <th style="width: 20%;">H/A</th>
+          <th style="width: 60%;">Match</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% include 'calender/_table.html' %}
+      </tbody>
+    </table>
+    {% include 'calender/_pagination.html' %}
   </div>
 {% endblock %}

@@ -4,3 +4,8 @@
 .join_btn{
     height: 36px;
 }
+a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}

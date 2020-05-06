@@ -22,7 +22,6 @@ class JoinMatch(models.Model):
     home_away = models.CharField(max_length=10)
     league_acl_fa = models.CharField(max_length=10)
     vs = models.CharField(max_length=20)
-    highlight = models.BooleanField()
     date = models.DateTimeField()
 
     content = models.TextField(default='')
@@ -37,4 +36,4 @@ class JoinMatch(models.Model):
     )
 
     def d_day(self):
-        return self.date.day - datetime.now().day
+        return (self.date.replace(tzinfo=None)-datetime.utcnow()).days + 2

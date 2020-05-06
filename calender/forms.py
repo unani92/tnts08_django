@@ -22,20 +22,14 @@ class JoinMatchForm(forms.ModelForm):
         ),
         initial='2013-01-01',
     )
-    highlight = forms.BooleanField(
-        required=False,
-        label='총동원령',
-        widget={
 
-        }
-    )
     vs = forms.CharField(
         label='팀명',
 
     )
     content = forms.CharField(
         label='',
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 'style': 'height:300px;'
             }
@@ -43,7 +37,7 @@ class JoinMatchForm(forms.ModelForm):
     )
     class Meta:
         model = JoinMatch
-        fields = ['highlight','home_away','league_acl_fa','vs','date','content']
+        fields = ['home_away','league_acl_fa','vs','date','content']
 
 class JoinForm(forms.ModelForm):
     time = forms.TimeField(

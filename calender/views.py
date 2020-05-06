@@ -1,11 +1,45 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import JoinMatchForm, JoinForm
 from .models import JoinMatch, Join, Dismiss
 # Create your views here.
 
+@login_required
 def index(request):
-    return render(request,'calender/index.html')
+    matches = JoinMatch.objects.all()
+    paginator = Paginator(matches,4)
+
+    if request.GET.get('search'):
+        page = request.GET.get('search')
+    else :
+        page = request.GET.get('page')
+
+    try:
+        matches = paginator.page(page)
+    except PageNotAnInteger:
+        matches = paginator.page(1)
+    except EmptyPage :
+        matches = paginator.page(paginator.num_pages)
+
+    idx = matches.number-1
+    max_idx = len(paginator.page_range)
+    start_idx = idx - 2 if idx >= 2 else 0
+    if idx < 2:
+        end_idx = 5 - start_idx
+    else:
+        end_idx = idx + 3 if idx <= max_idx else max_idx
+
+    page_range = list(paginator.page_range[start_idx:end_idx])
+
+    context = {
+        'matches':matches,
+        'page_range':page_range,
+        'max_idx':max_idx,
+    }
+
+    return render(request,'calender/index.html',context)
 
 def create(request):
     if request.method == 'POST':
@@ -29,9 +63,6 @@ def detail(request,pk):
         'joinform':joinform,
     }
     return render(request,'calender/detail.html',context)
-
-
-# 참전 인원 공유하는 드롭다운 개설
     
 def joinmatch(request,pk):
     response = redirect('calender:detail', pk)
@@ -69,3 +100,6 @@ def dismiss(request,pk):
 
         match.dismiss_match.add(dismiss)
         return response
+
+def search(request):
+    pass

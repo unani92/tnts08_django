@@ -1,0 +1,1 @@
+web: gunicorn tnts08_django.wsgi --log-file -

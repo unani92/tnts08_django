@@ -49,8 +49,8 @@
     </div>
 
     <form action="{% url 'board:search' %}" method="get">
-      <div class="d-flex form-row align-items-center">
-        <div class="col-auto my-1">
+      <div class="d-flex form-row align-items-center select_box">
+        <div class="options col-auto my-1">
           <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
           <select name="choose" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             <option selected>검색기준</option>
@@ -59,7 +59,7 @@
             <option value="content">내용</option>
           </select>
         </div>
-        <div class="col-auto">
+        <div class="search col-auto">
           <label class="sr-only" for="inlineFormInputGroup">Username</label>
           <div class="input-group">
             <div class="input-group-prepend">

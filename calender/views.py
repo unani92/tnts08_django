@@ -4,6 +4,9 @@ from .forms import JoinMatchForm, JoinForm
 from .models import JoinMatch, Join, Dismiss
 # Create your views here.
 
+def index(request):
+    return render(request,'calender/index.html')
+
 def create(request):
     if request.method == 'POST':
         form = JoinMatchForm(request.POST)

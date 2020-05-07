@@ -11,9 +11,13 @@ def signup(request) :
     if request.user.is_authenticated:
         return redirect('board:index')
 
-    if request.method == 'POST' : 
-        form = MyUserCreationForm(request.POST,request.FILES)
-        form.profile = request.FILES['profile']
+    if request.method == 'POST' :
+        if request.FILES:
+            form = MyUserCreationForm(request.POST,request.FILES)
+            form.profile = request.FILES['profile']
+        else :
+            form = MyUserCreationForm(request.POST)
+
         if form.is_valid() and request.POST.get('agree1') and request.POST.get('agree2'): 
             form.save()
             return redirect('board:index')
@@ -64,9 +68,13 @@ def delete(request) :
 def update(request) :
     user = MyUser.objects.get(username=request.user.username)
     if request.method=='POST' :
-        form = MyUserChangeForm(request.POST, request.FILES ,instance=user)
-        user.profile.delete()
-        form.profile = request.FILES['profile']
+        if request.FILES:
+            form = MyUserChangeForm(request.POST, request.FILES ,instance=user)
+            user.profile.delete()
+            form.profile = request.FILES['profile']
+        else :
+            form = MyUserChangeForm(request.POST, instance=user)
+
 
         if form.is_valid():
             form.save()

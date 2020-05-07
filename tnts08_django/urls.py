@@ -33,9 +33,9 @@ urlpatterns = [
     url(r'^ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
-if settings.DEBUG:
-    urlpatterns += [
-        url(r'^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT
-        }),
-    ]
+# if settings.DEBUG:
+#     urlpatterns += [
+#         url(r'^media/(?P<path>.*)$', serve, {
+#             'document_root': settings.MEDIA_ROOT
+#         }),
+#     ]

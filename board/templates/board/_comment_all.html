@@ -22,7 +22,11 @@
     </div>
     {% for comment in comments %}
       <div id="comment_like{{ comment.pk }}" class="media d-flex">
-        <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
+        {% if comment.name.profile %}
+          <img class="rounded-circle-username" src="{{ comment.name.profile.url }}" alt="">
+        {% else %}
+          <div style="width: 50px; height: 50px; font-size: large; color: white; font-weight: bolder" class="bg-info border border-info rounded-circle text-center d-flex justify-content-center align-items-center">{{ comment.name.first_name | slice:"1" }}</div>
+        {% endif %}
         <div class="media-body">
           <div class="px-3 d-flex justify-content-between">
             <h5 class="mt-0">{% include 'board/_comment_dropdown.html' %}</h5>

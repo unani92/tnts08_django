@@ -36,6 +36,7 @@ class MyUserCreationForm(UserCreationForm) :
         help_text=(''),
     )
     profile = forms.ImageField(
+        required=False,
         label=("프로필 사진"),
         widget=forms.FileInput(
             attrs={

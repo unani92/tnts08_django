@@ -58,15 +58,14 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'tempus_dominus',
-    'cloudinary_storage',
-    'django.contrib.staticfiles',
-    'cloudinary',
+    # 'cloudinary_storage',
+    # 'cloudinary',
 ]
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CKEDITOR_IMAGE_BACKEND = "pillow"
+# CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
 'default': {
@@ -178,7 +177,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
 AUTH_USER_MODEL = 'accounts.MyUser'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

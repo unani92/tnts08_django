@@ -58,14 +58,18 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'tempus_dominus',
+
     # 'cloudinary_storage',
     # 'cloudinary',
+
 ]
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
 # CKEDITOR_IMAGE_BACKEND = "pillow"
+
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
 'default': {

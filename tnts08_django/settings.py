@@ -65,8 +65,8 @@ INSTALLED_APPS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# CKEDITOR_IMAGE_BACKEND = "cloudinary"
-CKEDITOR_UPLOAD_PATH = '/media/uploads/'
+CKEDITOR_IMAGE_BACKEND = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
 'default': {
     'toolbar': 'Custom',

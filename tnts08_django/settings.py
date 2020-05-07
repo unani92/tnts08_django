@@ -65,7 +65,7 @@ INSTALLED_APPS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_IMAGE_BACKEND = "cloudinary"
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
 'default': {

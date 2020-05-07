@@ -61,3 +61,6 @@ webencodings==0.5.1
 whitenoise==5.0.1
 widgetsnbextension==3.5.1
 
+cloudinary==1.17.0
+django-cloudinary-storage==0.2.3
+

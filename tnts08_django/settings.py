@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'tempus_dominus',
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 
@@ -180,8 +183,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 AUTH_USER_MODEL = 'accounts.MyUser'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+# for heroku
 import dj_database_url
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':'hllhxq8xq',
+    'API_KEY':get_secret('CLOUDINARY_KEY'),
+    'API_SECRET':get_secret('CLOUDINARY_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 

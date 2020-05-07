@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'tempus_dominus',
     'cloudinary_storage',
-    'django.contrib.staticfiles',
     'cloudinary',
 ]
 

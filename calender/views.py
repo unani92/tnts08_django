@@ -41,6 +41,7 @@ def index(request):
 
     return render(request,'calender/index.html',context)
 
+@login_required
 def create(request):
     if request.method == 'POST':
         form = JoinMatchForm(request.POST)
@@ -55,6 +56,7 @@ def create(request):
     }
     return render(request,'calender/form.html',context)
 
+@login_required
 def detail(request,pk):
     match = get_object_or_404(JoinMatch,pk=pk)
     joinform = JoinForm()
@@ -63,7 +65,8 @@ def detail(request,pk):
         'joinform':joinform,
     }
     return render(request,'calender/detail.html',context)
-    
+
+@login_required
 def joinmatch(request,pk):
     response = redirect('calender:detail', pk)
     match = get_object_or_404(JoinMatch,pk=pk)
@@ -83,6 +86,7 @@ def joinmatch(request,pk):
         match.join_match.add(join)
         return response
 
+@login_required
 def dismiss(request,pk):
     response = redirect('calender:detail', pk)
     match = get_object_or_404(JoinMatch,pk=pk)
@@ -101,5 +105,33 @@ def dismiss(request,pk):
         match.dismiss_match.add(dismiss)
         return response
 
+@login_required
 def search(request):
-    pass
+    term = request.GET.get('q')
+    matches = JoinMatch.objects.filter(vs__exact=term)
+    paginator = Paginator(matches, 4)
+    page = request.GET.get('page')
+
+    try:
+        matches = paginator.page(page)
+    except PageNotAnInteger:
+        matches = paginator.page(1)
+    except EmptyPage:
+        matches = paginator.page(paginator.num_pages)
+
+    idx = matches.number - 1
+    max_idx = len(paginator.page_range)
+    start_idx = idx - 2 if idx >= 2 else 0
+    if idx < 2:
+        end_idx = 5 - start_idx
+    else:
+        end_idx = idx + 3 if idx <= max_idx else max_idx
+
+    page_range = list(paginator.page_range[start_idx:end_idx])
+
+    context = {
+        'matches': matches,
+        'page_range': page_range,
+        'max_idx': max_idx,
+    }
+    return render(request,'calender/index.html',context)

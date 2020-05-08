@@ -52,7 +52,11 @@
               <div class="row">
                 {% for person in match.join_match.all %}
                   <div class="col-3 d-flex flex-column align-items-center">
-                    <img class="rounded-circle" style="height: 50px;width: 50px" src="{{ person.user.profile.url }}" alt="">
+                    {% if person.user.profile %}
+                      <img class="rounded-circle-username" src="{{ person.user.profile.url }}" alt="">
+                    {% else %}
+                      <div style="width: 50px; height: 50px; font-size: large; color: white; font-weight: bolder" class="bg-info border border-info rounded-circle text-center d-flex justify-content-center align-items-center">{{ person.user.first_name | slice:"1" }}</div>
+                    {% endif %}
                     <span>{{ person.user.first_name }}</span>
                     <span>{{ person.time }}</span>
                   </div>
@@ -78,7 +82,11 @@
               <div class="row">
                 {% for person in match.dismiss_match.all %}
                   <div class="col-3 d-flex flex-column align-items-center">
-                    <img class="rounded-circle" style="height: 50px;width: 50px" src="{{ person.user.profile.url }}" alt="">
+                    {% if person.user.profile %}
+                      <img class="rounded-circle-username" src="{{ person.user.profile.url }}" alt="">
+                    {% else %}
+                      <div style="width: 50px; height: 50px; font-size: large; color: white; font-weight: bolder" class="bg-info border border-info rounded-circle text-center d-flex justify-content-center align-items-center">{{ person.user.first_name | slice:"1" }}</div>
+                    {% endif %}
                     <p>{{ person.user.first_name }}</p>
                   </div>
                 {% empty %}

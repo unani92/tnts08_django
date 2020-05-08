@@ -8,6 +8,6 @@ class MyUser(AbstractUser) :
     profile = models.ImageField(upload_to='profile')
     address = models.CharField(max_length=150)
 
-    def delete(self, *args, **kwargs):
-        os.remove(os.path.join(settings.MEDIA_ROOT,'profile',self.profile.path))
-        super(MyUser,self).delete(*args, **kwargs)
+    # def delete(self, *args, **kwargs):
+    #     os.remove(os.path.join(settings.MEDIA_ROOT,'profile',self.profile.path))
+    #     super(MyUser,self).delete(*args, **kwargs)

@@ -9,31 +9,40 @@
       D - {{ match.d_day }}
     </th>
   {% endif %}
-  {% if match.home_away == 'home' %}
-    <td>
-      <span class="badge badge-secondary">{{ match.home_away }}</span>
-    </td>
-  {% else %}
-    <td>
-      <span class="badge badge-light">{{ match.home_away }}</span>
-    </td>
-  {% endif %}
 
   {% if match.league_acl_fa == 'League' %}
     <td>
       <span class="badge badge-success">League</span>
       <a href="{% url 'calender:detail' match.pk %}">{{ match.date | date:'ymd' }} vs {{ match.vs }}</a>
+      {% if match.home_away == 'home' %}
+        <span class="badge badge-secondary">H</span>
+      {% else %}
+        <span class="badge badge-light">A</span>
+      {% endif %}
     </td>
   {% elif match.league_acl_fa == 'ACL' %}
     <td>
       <span class="badge badge-warning">ACL</span>
       <a href="{% url 'calender:detail' match.pk %}">{{ match.date | date:'ymd' }} vs {{ match.vs }}</a>
+      {% if match.home_away == 'home' %}
+        <span class="badge badge-secondary">H</span>
+      {% else %}
+        <span class="badge badge-light">A</span>
+      {% endif %}
     </td>
   {% else %}
     <td>
       <span class="badge badge-dark">FA</span>
       <a href="{% url 'calender:detail' match.pk %}">{{ match.date | date:'ymd' }} vs {{ match.vs }}</a>
+      {% if match.home_away == 'home' %}
+        <span class="badge badge-secondary">H</span>
+      {% else %}
+        <span class="badge badge-light">A</span>
+      {% endif %}
     </td>
   {% endif %}
+    <td>
+      <span>{{ match.join_match.count }} | {{ match.dismiss_match.count }}</span>
+    </td>
   </tr>
 {% endfor %}

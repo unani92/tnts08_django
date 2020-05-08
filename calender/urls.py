@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:pk>/', views.detail,name='detail'),
     path('<int:pk>/joinmatch/',views.joinmatch,name='joinmatch'),
     path('<int:pk>/dismiss/',views.dismiss,name='dismiss'),
+    path('search/', views.search, name='search')
 ]

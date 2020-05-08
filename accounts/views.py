@@ -62,7 +62,7 @@ def log_out(request):
 @login_required
 def delete(request) :
     request.user.delete()
-    return redirect('/home/')
+    return redirect('home:main')
 
 @login_required()
 def update(request) :

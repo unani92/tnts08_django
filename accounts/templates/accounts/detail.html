@@ -5,20 +5,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
 {% endblock accounts %}
 {% block content %}
-<div class="container d-flex justify-content-between align-items-center">
+<div class="container">
   <div class="title my-4 d-flex align-items-center">
     <img class="round_symbol mr-5" src="{% static 'images/round_symbol.jpg' %}">
     <h1 class="mb-0">회원 정보</h1>
   </div>
-
-  <form action="{% url 'accounts:detail' %}" method="get">
-    <div class="input-group">
-      <input type="text" name="firstname" class="form-control" placeholder="이름검색" aria-label="Recipient's username" aria-describedby="button-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+  <div style="width: 250px">
+    <form action="{% url 'accounts:detail' %}" method="get">
+      <div class="input-group">
+        <input type="text" name="firstname" class="form-control" placeholder="이름검색" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
 <div class="container">
   <table class="table">

@@ -95,6 +95,14 @@
   </div>
 
 
-  <div id="bottom" class='dummy'></div>
+  <div id="bottom" class='container dummy d-flex justify-content-center'>
+    <div  aria-label="breadcrumb">
+      <ol class="bg-white breadcrumb">
+        <li class="breadcrumb-item"><a class="text-dark font-weight-bold" href="{% url 'home:main' %}">Home</a></li>
+        <li class="breadcrumb-item"><a class="text-dark font-weight-bold" href="{% url 'board:index' %}">Board</a></li>
+        <li class="breadcrumb-item"><a class="text-dark font-weight-bold" href="{% url 'board:create' %}">Create</a></li>
+      </ol>
+    </div>
+  </div>
 
 {% endblock content %}

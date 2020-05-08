@@ -48,7 +48,7 @@ def create(request):
         if form.is_valid():
             form.save()
             print(request.POST.get('date'))
-            return redirect('board:index')
+            return redirect('calender:index')
     else :
         form = JoinMatchForm()
     context = {
